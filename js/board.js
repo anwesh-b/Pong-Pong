@@ -44,6 +44,9 @@ export class Board{
         this.ctx.closePath();
         this.ctx.fillStyle = 'brown';
         this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(lower.x2d, lower.y2d, BOARD_STAND_WIDTH/2 , 0, 2*Math.PI);
+        this.ctx.fill();
     }
 
     drawStands(){
@@ -102,6 +105,7 @@ export class Board{
         this.ctx.closePath();
         this.ctx.fillStyle = 'white';
         this.ctx.fill();
+        // this.ctx.strokeStyle = 'red';
         this.ctx.stroke();
 
         //Net Left Side
