@@ -86,6 +86,9 @@ export const MAX_BALL_X_DISTANCE = BOARD_WIDTH*5/8 ;
 export const MAX_BALL_Y_DISTANCE = BOARD_HEIGHT*2;
 export const ACCELERATION_DUE_TO_GRAVITY = 0.1;
 export const SPEED_AFTER_BOUNCE = -3.5;
+export const INITIAL_DX = 1;
+export const INITIAL_DY = 0;
+export const INITIAL_DZ = 7.8;
 
 //Player Bat
 export const BAT_HEIGHT = 50;

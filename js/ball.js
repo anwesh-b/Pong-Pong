@@ -1,14 +1,14 @@
 import { get2dCoordinate } from './utils.js';
-import { ACCELERATION_DUE_TO_GRAVITY, SPEED_AFTER_BOUNCE, BOARD_COORDINATE, BOARD_HEIGHT, BOARD_BALL_RADIUS, MAX_BALL_Z_DISTANCE, BOARD_LENTH, DISTANCE_TO_BOARD } from './constants.js';
+import { ACCELERATION_DUE_TO_GRAVITY, SPEED_AFTER_BOUNCE, INITIAL_DX, INITIAL_DY, INITIAL_DZ, BOARD_COORDINATE, BOARD_HEIGHT, BOARD_BALL_RADIUS, MAX_BALL_Z_DISTANCE, BOARD_LENTH, DISTANCE_TO_BOARD } from './constants.js';
 
 export class Ball{
     constructor(ctx,board){
         this.ctx = ctx;
         this.board = board;
         this.position = { x: 10, y: 100, z:250};
-        this.dZ = 7.8;
-        this.dY = 0;
-        this.dX = 1;
+        this.dX = INITIAL_DX;
+        this.dY = INITIAL_DY;
+        this.dZ = INITIAL_DZ;
         this.position2d = get2dCoordinate(this.position);
     }
 

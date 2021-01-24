@@ -15,7 +15,6 @@ export class Player{
     }
     drawBat(){
         this.bat2dPosition = get2dCoordinate(this.batPosition);
-        console.log(this.bat2dPosition);
         this.ctx.drawImage(this.bat, this.bat2dPosition.x2d, this.bat2dPosition.y2d,40,60);
     }
 }
