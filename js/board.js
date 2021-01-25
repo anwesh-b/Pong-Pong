@@ -1,5 +1,5 @@
 import { get2dCoordinate } from './utils.js';
-import { BOARD_COORDINATE, BOARD_STAND_WIDTH} from './constants.js';
+import { BOARD_COORDINATE, BOARD_STAND_WIDTH } from './constants/board.js';
 
 export class Board{
     constructor(ctx){
@@ -50,10 +50,10 @@ export class Board{
     }
 
     drawStands(){
-        this.drawStand(this.leftTopStandUpper,this.leftTopStandLower);  
-        this.drawStand(this.leftBotStandUpper,this.leftBotStandLower);  
-        this.drawStand(this.rightTopStandUpper,this.rightTopStandLower);  
-        this.drawStand(this.rightBotStandUpper,this.rightBotStandLower);  
+        this.drawStand(this.leftTopStandUpper, this.leftTopStandLower);  
+        this.drawStand(this.leftBotStandUpper, this.leftBotStandLower);  
+        this.drawStand(this.rightTopStandUpper, this.rightTopStandLower);  
+        this.drawStand(this.rightBotStandUpper, this.rightBotStandLower);  
     }
 
     drawMainBoard(){

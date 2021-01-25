@@ -1,4 +1,6 @@
 import { get2dCoordinate } from '../utils.js';
+import { BOARD } from '../constants/board.js';
+import { BAT_HEIGHT, BAT_WIDTH } from '../constants/constants.js';
 
 export class Player{
     constructor(ctx, x, y, z){
@@ -7,14 +9,28 @@ export class Player{
         this.bat.src = './assets/bat.png';
         this.batPosition = {x: x, y: y, z: z};
         this.bat2dPosition = get2dCoordinate(this.batPosition);
-        window.addEventListener('mousemove',(x)=>{
-            this.batPosition.x = x.x-550;
-            this.batPosition.y = x.y-130;
-            document.getElementById('ping-pong-container').style.cursor = 'none';
-        })
+        
     }
     drawBat(){
         this.bat2dPosition = get2dCoordinate(this.batPosition);
-        this.ctx.drawImage(this.bat, this.bat2dPosition.x2d, this.bat2dPosition.y2d,40,60);
+        let batHeightWidth = get2dCoordinate({x: this.batPosition.x + BAT_WIDTH, y:  this.batPosition.y + BAT_HEIGHT, z: this.batPosition.z})
+        let batHeight = Math.abs(batHeightWidth.x2d - this.bat2dPosition.x2d)
+        let batWidth = Math.abs(batHeightWidth.y2d - this.bat2dPosition.y2d)
+        this.ctx.drawImage(this.bat, this.bat2dPosition.x2d - batHeight, this.bat2dPosition.y2d,batHeight, batWidth);
+    }
+    detectCollision(ball){
+        if (ball.position.x + BOARD.BALL_RADIUS > this.batPosition.x && ball.position.x - BOARD.BALL_RADIUS < this.batPosition.x + BAT_WIDTH){
+            if ( ball.position.y + BOARD.BALL_RADIUS > this.batPosition.y && ball.position.y - BOARD.BALL_RADIUS < this.batPosition.y + BAT_HEIGHT){
+                // if (ball.position.z + BOARD.BALL_RADIUS > this.batPosition.z && ball.position.z - BOARD.BALL_RADIUS< this.batPosition.z){
+                    console.log(ball.position);
+                    console.log(this.batPosition);
+                    ball.dZ *= -1;
+                    // ball.dX *= -1;
+                // }
+            }
+        }
+        this.batPosition.x;
+        this.batPosition.y;
+        this.batPosition.x;
     }
 }
