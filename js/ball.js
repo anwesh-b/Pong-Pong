@@ -9,7 +9,7 @@ import { ACCELERATION_DUE_TO_GRAVITY,
         } from './constants/constants.js';
 
 export class Ball{
-    constructor(ctx,board){
+    constructor(ctx, board){
         this.ctx = ctx;
         this.board = board;
         this.position = { x: 10, y: 100, z:250};

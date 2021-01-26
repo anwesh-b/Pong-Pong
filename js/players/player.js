@@ -13,8 +13,6 @@ export class Player{
     }
     drawBat(){
         this.bat2dPosition = get2dCoordinate(this.batPosition);
-        console.log(this.batPosition);
-        console.log(this.bat2dPosition);
         let batHeightWidth = get2dCoordinate({x: this.batPosition.x + BAT_WIDTH, y:  this.batPosition.y + BAT_HEIGHT, z: this.batPosition.z})
         let batWidth = Math.abs(batHeightWidth.x2d - this.bat2dPosition.x2d)
         let batHeight = Math.abs(batHeightWidth.y2d - this.bat2dPosition.y2d)
@@ -33,8 +31,5 @@ export class Player{
                     console.log(this.batPosition);
                     ball.dZ *= -1;
         }
-        this.batPosition.x;
-        this.batPosition.y;
-        this.batPosition.x;
     }
 }
