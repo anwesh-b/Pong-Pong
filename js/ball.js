@@ -33,7 +33,6 @@ export class Ball{
     drawShadow(){
         let shadowPos = { x: this.position.x, y: BOARD.HEIGHT, z: this.position.z };
         var shadow = get2dCoordinate(shadowPos);
-    
         this.ctx.beginPath();
         this.ctx.arc(shadow.x2d, shadow.y2d, Math.abs(this.currentRadius), 0, 2 * Math.PI);
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.21)'
@@ -59,14 +58,15 @@ export class Ball{
             this.dX *= -1;
         }
         this.dY += ACCELERATION_DUE_TO_GRAVITY;
-        if (this.detectCollision()) this.dY = SPEED_AFTER_BOUNCE;
+        if (this.ballAboveBoard() && this.detectCollision(BOARD.HEIGHT)) this.dY = SPEED_AFTER_BOUNCE;
         this.position.x += this.dX;
         this.position.y += this.dY;
         this.position.z += this.dZ;
+        if (this.detectCollision(BOARD.HEIGHT*2)) this.dY = SPEED_AFTER_BOUNCE;
     }
 
-    detectCollision(){
-        if (this.position.y + BOARD.BALL_RADIUS >= BOARD.HEIGHT ) return true;
+    detectCollision(height){
+        if (this.position.y + BOARD.BALL_RADIUS >= height ) return true;
         else return false;
     }
 }

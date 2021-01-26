@@ -1,8 +1,8 @@
 // Canvas constant
 import { BOARD } from './board.js';
 
-export const CANVAS_HEIGHT = 600; 
-export const CANVAS_WIDTH = 800;
+export const CANVAS_HEIGHT = window.innerHeight; 
+export const CANVAS_WIDTH = window.innerWidth;
 
 export const PLAYER_PROJECTOR = {
     cameraPosition: {
@@ -40,4 +40,4 @@ export const BAT_Y = BOARD.HEIGHT;
 
 
 // Bot Difficulty (check ball timer)
-export const CHECK_BALL_TIMER = 30;
+export const CHECK_BALL_TIMER = 100;

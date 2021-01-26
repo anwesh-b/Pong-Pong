@@ -20,6 +20,7 @@ export class Player{
         this.ctx.drawImage(this.bat, this.bat2dPosition.x2d - batWidth /2 , this.bat2dPosition.y2d - (batHeight /2), batWidth, batHeight);
         this.ctx.globalAlpha = 1;
     }
+
     detectCollision(ball){
         if (ball.position.x + BOARD.BALL_RADIUS > this.batPosition.x - BAT_WIDTH/2 && 
             ball.position.x - BOARD.BALL_RADIUS < this.batPosition.x + BAT_WIDTH/2 &&

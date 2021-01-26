@@ -9,8 +9,6 @@ export class Bot extends Player{
         this.dX = 0;
         this.dY = 0;
         this.dZ = 0;   
-
-        // this.pastBallPos = this.ball.position;
         this.currentBallPos = this.ball.position;
         setInterval(this.moveBot.bind(this), CHECK_BALL_TIMER);
     }
@@ -30,13 +28,8 @@ export class Bot extends Player{
 
     moveBot(){
         this.neededChange();
-        console.log(this.ball);
-
-        console.log(this.batPosition);
-        // console.log(this.dX, this.dY, this.dZ);
         this.batPosition.x = this.dX;
         this.batPosition.y = this.dY;
-        // this.batPosition.z += this.dZ;
         if (this.batPosition.y > BOARD.HEIGHT){
             this.batPosition.y -= 2* (this.batPosition.y - BOARD.HEIGHT)
         }
