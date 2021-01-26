@@ -31,6 +31,6 @@ export class Game{
         this.botPlayer.drawBat();
         this.ball.drawBall();
         this.player1.drawBat();
-        requestAnimationFrame(this.animate.bind(this));
+        requestAnimationFrame(this.animateGame.bind(this));
     }
 }
