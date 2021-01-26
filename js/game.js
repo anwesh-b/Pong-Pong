@@ -23,7 +23,7 @@ export class Game{
         // this.player1.detectCollision(this.ball);
         this.board.drawBoard();
         this.ball.drawBall();
-        // this.player1.drawBat();
+        this.player1.drawBat();
         requestAnimationFrame(this.animate.bind(this));
     }
 }
