@@ -3,6 +3,7 @@ import { Board } from "./board.js";
 import { Human } from './players/human.js';
 import { BOARD, DISTANCE_TO_BOARD } from './constants/board.js';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './constants/constants.js';
+
 export class Game{
     constructor(gameContainer){
         gameContainer.innerHTML = '<canvas></canvas>'
@@ -20,7 +21,7 @@ export class Game{
         this.ctx.fillStyle = "white";
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.ball.moveBall();
-        // this.player1.detectCollision(this.ball);
+        this.player1.detectCollision(this.ball);
         this.board.drawBoard();
         this.ball.drawBall();
         this.player1.drawBat();

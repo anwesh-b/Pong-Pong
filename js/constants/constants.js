@@ -35,5 +35,5 @@ export const INITIAL_DZ = 7.8;
 
 //Player Bat
 export const BAT_Y = BOARD.HEIGHT;
-export const BAT_HEIGHT = 90;
-export const BAT_WIDTH = 50;
+export const BAT_HEIGHT = 60;
+export const BAT_WIDTH = 30;
