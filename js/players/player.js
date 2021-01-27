@@ -3,13 +3,14 @@ import { get2dCoordinate } from '../utils.js';
 import { BAT_HEIGHT, BAT_WIDTH } from '../constants/constants.js';
 
 export class Player{
-    constructor(ctx, x, y, z){
+    constructor(ctx, x, y, z, id){
         this.ctx = ctx;
+        this.playerId = id;
         this.bat = new Image();
         this.bat.src = './assets/bat.png';
-        this.batPosition = {x: x, y: y, z: z};
+        this.batPosition = {x:x, y:y, z:z};
         this.bat2dPosition = get2dCoordinate(this.batPosition);
-        
+        this.serveState = false;        
     }
     drawBat(){
         this.bat2dPosition = get2dCoordinate(this.batPosition);
@@ -28,9 +29,14 @@ export class Player{
             ball.position.y - BOARD.BALL_RADIUS < this.batPosition.y + BAT_HEIGHT/2 &&
             ball.position.z + BOARD.BALL_RADIUS > this.batPosition.z &&
             ball.position.z - BOARD.BALL_RADIUS< this.batPosition.z){
-                    console.log(ball.position);
-                    console.log(this.batPosition);
-                    ball.dZ *= -1;
-        }
+                ball.dZ *= -1;
+                ball.dX += Math.sin((ball.position.x - this.batPosition.x) * Math.PI / (BAT_WIDTH * 2))
+                if( this.serveState) {
+                    ball.dZ = 5;
+                    this.serveState = false;
+                }
+                ball.lastPlayerTouched = this.playerId;
+                ball.isBeingServed = false;
+            }
     }
 }

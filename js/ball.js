@@ -1,4 +1,5 @@
 import { get2dCoordinate } from './utils.js';
+import { BALL_RESET_POS } from './constants/constants.js';
 import { DISTANCE_TO_BOARD, BOARD, BOARD_COORDINATE } from './constants/board.js';
 import { ACCELERATION_DUE_TO_GRAVITY, 
             SPEED_AFTER_BOUNCE, 
@@ -12,10 +13,15 @@ export class Ball{
     constructor(ctx, board){
         this.ctx = ctx;
         this.board = board;
-        this.position = { x: 10, y: 100, z:250};
-        this.dX = INITIAL_DX;
-        this.dY = INITIAL_DY;
-        this.dZ = INITIAL_DZ;
+        this.position = { x:0, y:0, z:0};
+        this.resetBallPosition(0);
+        
+        this.dX = 0;
+        this.dY = 0;
+        this.dZ = 0;
+        this.bouncheOut = false;
+        this.lastPlayerTouched = null;
+        this.isBeingServed = true;
         this.position2d = get2dCoordinate(this.position);
     }
 
@@ -51,22 +57,31 @@ export class Ball{
     }
 
     moveBall(){
-        if( this.position.z <= DISTANCE_TO_BOARD - MAX_BALL_Z_DISTANCE || 
-            this.position.z>= DISTANCE_TO_BOARD + BOARD.LENGTH + MAX_BALL_Z_DISTANCE) 
-        {
-            this.dZ *= -1;
-            this.dX *= -1;
-        }
-        this.dY += ACCELERATION_DUE_TO_GRAVITY;
+        // if( this.position.z <= DISTANCE_TO_BOARD - MAX_BALL_Z_DISTANCE || 
+        //     this.position.z>= DISTANCE_TO_BOARD + BOARD.LENGTH + MAX_BALL_Z_DISTANCE) 
+        // {
+        //     this.dZ *= -1;
+        //     this.dX *= -1;
+        // }
+        if (!this.isBeingServed) this.dY += ACCELERATION_DUE_TO_GRAVITY;
         if (this.ballAboveBoard() && this.detectCollision(BOARD.HEIGHT)) this.dY = SPEED_AFTER_BOUNCE;
         this.position.x += this.dX;
         this.position.y += this.dY;
         this.position.z += this.dZ;
-        if (this.detectCollision(BOARD.HEIGHT*2)) this.dY = SPEED_AFTER_BOUNCE;
+        if (this.detectCollision(BOARD.HEIGHT*2)) {
+            this.dY = SPEED_AFTER_BOUNCE;
+            this.bouncheOut = true;
+        }
     }
 
     detectCollision(height){
         if (this.position.y + BOARD.BALL_RADIUS >= height ) return true;
         else return false;
+    }
+
+    resetBallPosition(id){
+        this.position.x = BALL_RESET_POS[id].x
+        this.position.y = BALL_RESET_POS[id].y
+        this.position.z = BALL_RESET_POS[id].z
     }
 }

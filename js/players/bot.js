@@ -3,8 +3,8 @@ import { BOARD, BOARD_LENGTH, DISTANCE_TO_BOARD } from '../constants/board.js';
 import { CHECK_BALL_TIMER } from '../constants/constants.js';
 
 export class Bot extends Player{
-    constructor(ctx, x, y, z, ball){
-        super(ctx, x, y ,z)
+    constructor(ctx, x, y, z, id, ball){
+        super(ctx, x, y ,z, id)
         this.ball = ball;
         this.dX = 0;
         this.dY = 0;
@@ -14,15 +14,14 @@ export class Bot extends Player{
     }
 
     neededChange(){
-        // this.pastBallPos = this.currentBallPos;
         this.currentBallPos = this.ball.position;
-        this.dX = (this.currentBallPos.x) ;
+        this.dX = (this.currentBallPos.x);
         if (this.ball.dZ >= 0 && 
             this.ball.position.z > DISTANCE_TO_BOARD + BOARD_LENGTH/2 &&
             this.ball.position.y > BOARD.HEIGHT * 3/ 4) {
             this.dY = this.currentBallPos.y;
         }
-        // this.dY= (this.currentBallPos.y+this.ball.dY) ;
+        this.dY= (this.currentBallPos.y+this.ball.dY) ;
         // this.dZ = (this.currentBallPos.z+this.ball.dZ) ;
     }
 
@@ -32,6 +31,9 @@ export class Bot extends Player{
         this.batPosition.y = this.dY;
         if (this.batPosition.y > BOARD.HEIGHT){
             this.batPosition.y -= 2* (this.batPosition.y - BOARD.HEIGHT)
+        }
+        if (this.batPosition.y < BOARD.HEIGHT/2){
+            this.batPosition.y = BOARD.HEIGHT;
         }
     }
 }
