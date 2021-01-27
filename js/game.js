@@ -18,20 +18,31 @@ export class Game{
         this.botPlayer = new Bot(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD+BOARD.LENGTH, 1, this.ball);
         this.player1.serveState = true;
         this.isPaused = false;
+        this.currentServe = 0;
+        this.maxServe = 2;
+        this.servePlayer = this.player1.playerId;
         this.runGame();
     }
 
     runGame(){
+        // console.log('bye')
         this.player1.detectCollision(this.ball);
         this.botPlayer.detectCollision(this.ball);
         if (this.ball.bouncheOut == true) this.resetToServe(); 
+        if (this.servePlayer === this.botPlayer.playerId && this.isPaused) {
+            this.botPlayer.serve();
+            this.isPaused = false;
+        }
         this.ctx.fillStyle = "white";
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.ball.moveBall();
         // this.botPlayer.moveBot();
+        if(this.ball.position.z > this.botPlayer.batPosition.z) this.ball.drawBall();
+        if(this.ball.position.y >= BOARD.HEIGHT ) this.ball.drawBall();
         this.botPlayer.drawBat();
         this.board.drawBoard();
-        this.ball.drawBall();
+        if ( this.ball.position.y <= BOARD.HEIGHT && 
+            this.ball.position.z <= this.botPlayer.batPosition.z) this.ball.drawBall();
         this.player1.drawBat();
         requestAnimationFrame(this.runGame.bind(this));
     }
@@ -43,14 +54,19 @@ export class Game{
         this.ball.dX = 0;
         this.ball.dY = 0;
         this.ball.dZ = 0;
-        setTimeout(()=>{
-            if(this.isPaused){
-                this.player1.serveState = true;
-                this.ball.resetBallPosition(0);
-                console.log('ho');
-                this.isPaused = false;
+        if(this.isPaused){
+            this.currentServe++;
+            if(this.currentServe >= this.maxServe){
+                if (this.servePlayer === this.player1.playerId) this.servePlayer = this.botPlayer.playerId;
+                else this.servePlayer = this.player1.playerId;
+                this.currentServe = 0;
             }
-        },1000);
+            if (this.servePlayer === this.player1.playerId) this.player1.serveState = true;
+            else this.botPlayer.serveState = true;
+            this.ball.resetBallPosition(this.servePlayer);
+            console.log('ho');
+            this.isPaused = false;
+        }
         this.isPaused = true;
     }
 }

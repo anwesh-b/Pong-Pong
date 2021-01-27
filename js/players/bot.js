@@ -36,4 +36,12 @@ export class Bot extends Player{
             this.batPosition.y = BOARD.HEIGHT;
         }
     }
+
+    serve(){
+        setTimeout(()=>{
+            this.ball.dZ = -10;
+            this.ball.dX = 1;
+            // this.ball.dY = 2;
+        },1000)
+    }
 }
