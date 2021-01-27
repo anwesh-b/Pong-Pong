@@ -17,7 +17,7 @@ export class Game{
         this.player1 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*3/4, 0);
         this.botPlayer = new Bot(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD+BOARD.LENGTH, 1, this.ball);
         this.player1.serveState = true;
-        this.isPaused = true;
+        this.isPaused = false;
         this.runGame();
     }
 
@@ -40,18 +40,17 @@ export class Game{
         this.isPaused = true;
         this.ball.bouncheOut = false;
         this.ball.isBeingServed = true;
-        this.player1.serveState = true;
         this.ball.dX = 0;
         this.ball.dY = 0;
         this.ball.dZ = 0;
-        this.player1.serveState = true;
         setTimeout(()=>{
-            // this.ball.position = { x: 50, y: 100, z:40};
-            // this.ball.position = BALL_RESET_POS;
-            this.ball.resetBallPosition(0);
-            // this.ball.position.x = BALL_RESET_POS.x;
-            // this.ball.position.y = BALL_RESET_POS.y;
-            // this.ball.position.z = BALL_RESET_POS.z;
+            if(this.isPaused){
+                this.player1.serveState = true;
+                this.ball.resetBallPosition(0);
+                console.log('ho');
+                this.isPaused = false;
+            }
         },1000);
+        this.isPaused = true;
     }
 }
