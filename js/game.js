@@ -2,6 +2,7 @@ import { Ball } from './ball.js';
 import { Board } from './board.js';
 import { Bot } from './players/bot.js';
 import { Human } from './players/human.js';
+import { Scoreboard } from './scoreboard.js';
 import { BOARD, DISTANCE_TO_BOARD } from './constants/board.js';
 import { CANVAS_HEIGHT, CANVAS_WIDTH, BALL_RESET_POS, SPEED_AFTER_BOUNCE } from './constants/constants.js';
 
@@ -12,19 +13,26 @@ export class Game{
         this.ctx = this.canvas.getContext('2d');
         this.canvas.height = CANVAS_HEIGHT;
         this.canvas.width = CANVAS_WIDTH;
+        
+        this.gameOver = false;
+        this.gameOverScore = 11;
+        //First serve player
+        this.servePlayer = 0;
+    
         this.board = new Board(this.ctx);
-        this.ball = new Ball(this.ctx, this.board, 1);
+        this.ball = new Ball(this.ctx, this.board, this.servePlayer);
         this.player1 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*3/4, 0);
         this.botPlayer = new Bot(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD+BOARD.LENGTH, 1, this.ball);
         this.players = [this.player1, this.botPlayer];
-        this.botPlayer.serveState = true;
-        // this.player1.serveState = true;
+        
+        this.players[this.servePlayer].serveState = true;
+        if ( this.botPlayer.playerId === this.servePlayer ) this.botPlayer.serve();
+        
         this.isPaused = false;
         this.currentServe = 0;
         this.maxServe = 2;
-        this.servePlayer = this.botPlayer.playerId;
+        this.scoreBoard = new Scoreboard( this.ctx, this.player1, this.botPlayer );
         this.runGame();
-        this.botPlayer.serve();
     }
 
     runGame(){
@@ -38,7 +46,6 @@ export class Game{
         this.ctx.fillStyle = "white";
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.ball.moveBall();
-        // this.botPlayer.moveBot();
         if(this.ball.position.z > this.botPlayer.batPosition.z) this.ball.drawBall();
         if(this.ball.position.y >= BOARD.HEIGHT ) this.ball.drawBall();
         this.botPlayer.drawBat();
@@ -46,15 +53,17 @@ export class Game{
         if ( this.ball.position.y <= BOARD.HEIGHT && 
             this.ball.position.z <= this.botPlayer.batPosition.z) this.ball.drawBall();
         this.player1.drawBat();
-        requestAnimationFrame(this.runGame.bind(this));
+        this.scoreBoard.displayScores();
+        if(!this.gameOver) requestAnimationFrame(this.runGame.bind(this));
     }
 
     resetToServe(){
         if(this.ball.scoreTo != undefined) this.players[this.ball.scoreTo].score++;
-        // debugger;
-        this.players.forEach((kheladi)=>{
-            console.log(`Player: ${kheladi.playerId} Score:${kheladi.score}`);
-        })
+        if( this.players[0].score >= this.gameOverScore || this.players[1].score >= this.gameOverScore ) {
+            this.gameOver = true;
+            if (this.players[0].score> this.players[1].score) gameEnd(this.players[0].playerId);
+            else this.gameEnd(this.players[1].playerId);
+        }   
         this.isPaused = true;
         this.ball.isInvalid = false;
         this.ball.isBeingServed = true;
