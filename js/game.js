@@ -3,7 +3,7 @@ import { Board } from './board.js';
 import { Bot } from './players/bot.js';
 import { Human } from './players/human.js';
 import { BOARD, DISTANCE_TO_BOARD } from './constants/board.js';
-import { CANVAS_HEIGHT, CANVAS_WIDTH, BALL_RESET_POS } from './constants/constants.js';
+import { CANVAS_HEIGHT, CANVAS_WIDTH, BALL_RESET_POS, SPEED_AFTER_BOUNCE } from './constants/constants.js';
 
 export class Game{
     constructor(gameContainer){
@@ -13,22 +13,23 @@ export class Game{
         this.canvas.height = CANVAS_HEIGHT;
         this.canvas.width = CANVAS_WIDTH;
         this.board = new Board(this.ctx);
-        this.ball = new Ball(this.ctx, this.board);
+        this.ball = new Ball(this.ctx, this.board, 1);
         this.player1 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*3/4, 0);
         this.botPlayer = new Bot(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD+BOARD.LENGTH, 1, this.ball);
-        this.player1.serveState = true;
+        this.botPlayer.serveState = true;
+        // this.player1.serveState = true;
         this.isPaused = false;
         this.currentServe = 0;
         this.maxServe = 2;
-        this.servePlayer = this.player1.playerId;
+        this.servePlayer = this.botPlayer.playerId;
         this.runGame();
+        this.botPlayer.serve();
     }
 
     runGame(){
-        // console.log('bye')
         this.player1.detectCollision(this.ball);
         this.botPlayer.detectCollision(this.ball);
-        if (this.ball.bouncheOut == true) this.resetToServe(); 
+        if (this.ball.isInvalid == true) this.resetToServe(); 
         if (this.servePlayer === this.botPlayer.playerId && this.isPaused) {
             this.botPlayer.serve();
             this.isPaused = false;
@@ -49,11 +50,12 @@ export class Game{
 
     resetToServe(){
         this.isPaused = true;
-        this.ball.bouncheOut = false;
+        this.ball.isInvalid = false;
         this.ball.isBeingServed = true;
         this.ball.dX = 0;
         this.ball.dY = 0;
         this.ball.dZ = 0;
+        this.ball.speedAfterBounche = SPEED_AFTER_BOUNCE;
         if(this.isPaused){
             this.currentServe++;
             if(this.currentServe >= this.maxServe){
@@ -64,7 +66,6 @@ export class Game{
             if (this.servePlayer === this.player1.playerId) this.player1.serveState = true;
             else this.botPlayer.serveState = true;
             this.ball.resetBallPosition(this.servePlayer);
-            console.log('ho');
             this.isPaused = false;
         }
         this.isPaused = true;

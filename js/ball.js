@@ -10,18 +10,19 @@ import { ACCELERATION_DUE_TO_GRAVITY,
         } from './constants/constants.js';
 
 export class Ball{
-    constructor(ctx, board){
+    constructor(ctx, board, firstServePlayer = 0){
         this.ctx = ctx;
         this.board = board;
         this.position = { x:0, y:0, z:0};
-        this.resetBallPosition(0);
+        this.resetBallPosition(firstServePlayer);
         
         this.dX = 0;
         this.dY = 0;
         this.dZ = 0;
-        this.bouncheOut = false;
+        this.isInvalid = false;
         this.lastPlayerTouched = null;
         this.isBeingServed = true;
+        this.speedAfterBounche = SPEED_AFTER_BOUNCE;
         this.position2d = get2dCoordinate(this.position);
     }
 
@@ -57,21 +58,36 @@ export class Ball{
     }
 
     moveBall(){
-        // if( this.position.z <= DISTANCE_TO_BOARD - MAX_BALL_Z_DISTANCE || 
-        //     this.position.z>= DISTANCE_TO_BOARD + BOARD.LENGTH + MAX_BALL_Z_DISTANCE) 
-        // {
-        //     this.dZ *= -1;
-        //     this.dX *= -1;
-        // }
         if (!this.isBeingServed) this.dY += ACCELERATION_DUE_TO_GRAVITY;
-        if (this.ballAboveBoard() && this.detectCollision(BOARD.HEIGHT)) this.dY = SPEED_AFTER_BOUNCE;
+        if (this.ballAboveBoard() && this.detectCollision(BOARD.HEIGHT)) this.dY = this.speedAfterBounche;
         this.position.x += this.dX;
         this.position.y += this.dY;
         this.position.z += this.dZ;
         if (this.detectCollision(BOARD.HEIGHT*2)) {
-            this.dY = SPEED_AFTER_BOUNCE;
-            this.bouncheOut = true;
+            this.dY = this.speedAfterBounche;
+            this.isInvalid = true;
         }
+        if (this.detectNetCollision()){
+            console.log('bye')
+            this.dZ *= -0.2;
+            this.dX *= 0.2;
+            this.position.z += BOARD.BALL_RADIUS;
+            this.speedAfterBounche *=0.2;
+            this.isInvalid = true;
+        }
+    }
+
+    detectNetCollision(){
+        if(
+            this.position.y + BOARD.BALL_RADIUS > BOARD.HEIGHT - BOARD.NET_HEIGHT &&
+            this.position.y < BOARD.HEIGHT && 
+            this.position.z + BOARD.BALL_RADIUS >= BOARD.LENGTH/2 &&
+            this.position.z - BOARD.BALL_RADIUS <=  BOARD.LENGTH/2 &&
+            Math.abs(this.position.x) <= BOARD.WIDTH/2
+        ){
+            return true;
+        }
+        return false;
     }
 
     detectCollision(height){
