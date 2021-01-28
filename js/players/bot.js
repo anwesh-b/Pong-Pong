@@ -43,6 +43,7 @@ export class Bot extends Player{
             this.ball.dX = Math.random()*2-1;
             this.ball.dY = 0;
             this.ball.isBeingServed = false;
+            this.ball.lastPlayerTouched = this.playerId;
             setTimeout(()=>{this.serveState = false;},200)
         },1000)
     }

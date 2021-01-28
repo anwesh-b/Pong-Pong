@@ -24,6 +24,7 @@ export class Ball{
         this.isBeingServed = true;
         this.speedAfterBounche = SPEED_AFTER_BOUNCE;
         this.position2d = get2dCoordinate(this.position);
+        this.bounches = 0;
     }
 
     drawBall(){
@@ -59,7 +60,28 @@ export class Ball{
 
     moveBall(){
         if (!this.isBeingServed) this.dY += ACCELERATION_DUE_TO_GRAVITY;
-        if (this.ballAboveBoard() && this.detectCollision(BOARD.HEIGHT)) this.dY = this.speedAfterBounche;
+        if (this.ballAboveBoard() && this.detectCollision(BOARD.HEIGHT)) {
+            this.bounches++;
+            this.dY = this.speedAfterBounche;
+            // Check if the position touched is valid or not 
+
+            if(
+                this.bounches === 1 &&
+                (   this.position.z < this.lastPlayerTouched*BOARD.LENGTH/2 + DISTANCE_TO_BOARD ||
+                    this.position.z > (1 + this.lastPlayerTouched)*BOARD.LENGTH/2 + DISTANCE_TO_BOARD)
+                )
+            {
+                this.isInvalid = true;
+            }
+            else if(
+                this.bounches > 1 &&
+                (   this.position.z < (1-this.lastPlayerTouched) * BOARD.LENGTH/2 + DISTANCE_TO_BOARD ||
+                    this.position.z > (2-this.lastPlayerTouched) * BOARD.LENGTH/2 + DISTANCE_TO_BOARD )
+                )
+            {
+                this.isInvalid = true;
+            }
+        }
         this.position.x += this.dX;
         this.position.y += this.dY;
         this.position.z += this.dZ;

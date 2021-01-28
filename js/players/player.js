@@ -40,7 +40,6 @@ export class Player{
                     else ball.dZ = 5;
                     this.serveState = false;
                 }
-                console.log(this.serveState);
                 ball.lastPlayerTouched = this.playerId;
                 ball.isBeingServed = false;
             }

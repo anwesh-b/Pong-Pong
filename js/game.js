@@ -55,6 +55,7 @@ export class Game{
         this.ball.dX = 0;
         this.ball.dY = 0;
         this.ball.dZ = 0;
+        this.ball.bounches = 0;
         this.ball.speedAfterBounche = SPEED_AFTER_BOUNCE;
         if(this.isPaused){
             this.currentServe++;
