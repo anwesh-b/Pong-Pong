@@ -16,6 +16,7 @@ export class Game{
         this.ball = new Ball(this.ctx, this.board, 1);
         this.player1 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*3/4, 0);
         this.botPlayer = new Bot(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD+BOARD.LENGTH, 1, this.ball);
+        this.players = [this.player1, this.botPlayer];
         this.botPlayer.serveState = true;
         // this.player1.serveState = true;
         this.isPaused = false;
@@ -49,6 +50,11 @@ export class Game{
     }
 
     resetToServe(){
+        if(this.ball.scoreTo != undefined) this.players[this.ball.scoreTo].score++;
+        // debugger;
+        this.players.forEach((kheladi)=>{
+            console.log(`Player: ${kheladi.playerId} Score:${kheladi.score}`);
+        })
         this.isPaused = true;
         this.ball.isInvalid = false;
         this.ball.isBeingServed = true;
@@ -70,5 +76,9 @@ export class Game{
             this.isPaused = false;
         }
         this.isPaused = true;
+    }
+
+    gameEnd(winner){
+        console.log(`Player ${winner} won`);
     }
 }

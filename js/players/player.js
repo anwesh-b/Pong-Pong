@@ -10,7 +10,8 @@ export class Player{
         this.bat.src = './assets/bat.png';
         this.batPosition = {x:x, y:y, z:z};
         this.bat2dPosition = get2dCoordinate(this.batPosition);
-        this.serveState = false;        
+        this.serveState = false;    
+        this.score = 0;    
     }
     drawBat(){
         this.bat2dPosition = get2dCoordinate(this.batPosition);
