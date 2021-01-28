@@ -29,7 +29,6 @@ export class Player{
             ball.position.y - BOARD.BALL_RADIUS < this.batPosition.y + BAT_HEIGHT/2 &&
             ball.position.z + BOARD.BALL_RADIUS > this.batPosition.z &&
             ball.position.z - BOARD.BALL_RADIUS< this.batPosition.z){
-                console.log('mmm');
                 ball.dZ *= -1;
                 ball.dX += Math.sin((ball.position.x - this.batPosition.x) * Math.PI / (BAT_WIDTH * 2))
                 if( this.serveState) {
