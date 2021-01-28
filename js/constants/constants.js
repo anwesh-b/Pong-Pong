@@ -36,7 +36,7 @@ export const ACCELERATION_DUE_TO_GRAVITY = 0.1;
 
 export const BALL_RESET_POS = [
                                 { x: 50, y: 100, z:DISTANCE_TO_BOARD * 4/5},
-                                { x: 50, y: 100, z:BOARD.LENGTH + DISTANCE_TO_BOARD * 6/5}
+                                { x: 50, y: 100, z:BOARD.LENGTH + DISTANCE_TO_BOARD * 4.5/5}
                               ];
 
 //Player Bat

@@ -39,9 +39,12 @@ export class Bot extends Player{
 
     serve(){
         setTimeout(()=>{
-            this.ball.dZ = -10;
-            this.ball.dX = 1;
-            // this.ball.dY = 2;
+            this.ball.dZ = -4;
+            this.ball.dX = -0.5;
+            this.ball.dY = -1;
+            this.serveState = false;
+            this.ball.isBeingServed = false;
+            // debugger;
         },1000)
     }
 }
