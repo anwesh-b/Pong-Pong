@@ -27,8 +27,8 @@ export class Game{
     }
 
     runGame(){
-        this.player1.detectCollision(this.ball);
-        this.botPlayer.detectCollision(this.ball);
+        this.player1.detectBallCollision(this.ball);
+        this.botPlayer.detectBallCollision(this.ball);
         if (this.ball.isInvalid == true) this.resetToServe(); 
         if (this.servePlayer === this.botPlayer.playerId && this.isPaused) {
             this.botPlayer.serve();

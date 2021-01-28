@@ -1,4 +1,4 @@
-import { BOARD } from '../constants/board.js';
+import { BOARD, DISTANCE_TO_BOARD } from '../constants/board.js';
 import { get2dCoordinate } from '../utils.js';
 import { BAT_HEIGHT, BAT_WIDTH } from '../constants/constants.js';
 
@@ -22,7 +22,7 @@ export class Player{
         this.ctx.globalAlpha = 1;
     }
 
-    detectCollision(ball){
+    detectBallCollision(ball){
         if (ball.position.x + BOARD.BALL_RADIUS > this.batPosition.x - BAT_WIDTH/2 && 
             ball.position.x - BOARD.BALL_RADIUS < this.batPosition.x + BAT_WIDTH/2 &&
             ball.position.y + BOARD.BALL_RADIUS > this.batPosition.y - BAT_HEIGHT/2 &&
@@ -31,10 +31,16 @@ export class Player{
             ball.position.z - BOARD.BALL_RADIUS< this.batPosition.z){
                 ball.dZ *= -1;
                 ball.dX += Math.sin((ball.position.x - this.batPosition.x) * Math.PI / (BAT_WIDTH * 2))
+                ball.dY = -2;
+                if (ball.dZ >0 ) ball.dZ = 8;
+                else ball.dZ = -8;
                 if( this.serveState) {
-                    ball.dZ = 5;
+                    ball.dY = 0;
+                    if (this.batPosition.z > BOARD.WIDTH/2 + DISTANCE_TO_BOARD)  ball.dZ = -5;
+                    else ball.dZ = 5;
                     this.serveState = false;
                 }
+                console.log(this.serveState);
                 ball.lastPlayerTouched = this.playerId;
                 ball.isBeingServed = false;
             }

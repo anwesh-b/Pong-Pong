@@ -42,8 +42,8 @@ export class Bot extends Player{
             this.ball.dZ = Math.random()*2+3;
             this.ball.dX = Math.random()*2-1;
             this.ball.dY = 0;
-            this.serveState = false;
             this.ball.isBeingServed = false;
+            setTimeout(()=>{this.serveState = false;},200)
         },1000)
     }
 }

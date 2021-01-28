@@ -68,7 +68,6 @@ export class Ball{
             this.isInvalid = true;
         }
         if (this.detectNetCollision()){
-            console.log('bye')
             this.dZ *= -0.2;
             this.dX *= 0.2;
             this.position.z += BOARD.BALL_RADIUS;
