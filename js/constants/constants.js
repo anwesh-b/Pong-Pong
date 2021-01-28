@@ -18,8 +18,8 @@ export const PLAYER_PROJECTOR = {
 
     viewerPosition: {
       x: CANVAS_WIDTH/2,
-      y: 50,
-      z: 500
+      y: 100,
+      z: 450
     }
   };
 
