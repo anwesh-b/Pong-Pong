@@ -1,4 +1,82 @@
-*{
-    margin: 0;
-    padding: 0;
+.dashboard-container{
+    display: block;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: rgb(168, 224, 247);
+    font-family: 'Comic Sans MS';
+}
+
+.dashboard{
+    display: block;
+    width: 100%;
+}
+
+#setting-icon{
+    width: 50px;
+    float: right;
+    overflow: hidden;
+    margin: 15px 30px 0 0;
+    padding: 5px;
+    transition: 0.5s;
+    border-radius: 20px;
+    background-color: rgba(100, 100, 100, 1);
+}
+
+#setting-icon:hover{
+    border-radius: 30px;
+    transition: 0.5s;
+}
+
+.main-dashboard{
+    width: 100%;
+    margin-top: 100px;
+}
+
+#title{
+    text-align: center;
+    font-size: 40px;
+}
+
+.main-dashboard{
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.main-dashboard ul li{
+    width: 200px;
+    text-align: center;
+    background-color: rgb(225, 225, 225);
+    border-radius: 30px; 
+    padding: 10px;    
+    display: inline-block;    
+    border: solid 2px ;                  
+}
+
+.setting-container{
+    width: 100%;
+    display: none;
+}
+
+.settings{
+    margin: 0 auto;
+    padding: 0 20px;
+    max-width: 500px;
+    text-align: center;
+}
+
+#back-settings{
+    float: left;
+}
+
+.settings ul{
+    list-style-type: none;
+}
+
+.settings li{
+    text-align: left;
+    padding: 5px;
+}
+
+.ping-pong-container{
+    display: none;
 }

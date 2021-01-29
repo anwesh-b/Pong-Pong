@@ -3,8 +3,8 @@ import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants/constants.js';
 import { BOARD, BOARD_LENGTH, DISTANCE_TO_BOARD } from '../constants/board.js';
 
 export class Human extends Player{
-    constructor(ctx, x, y, z, id){
-        super(ctx, x, y, z, id);
+    constructor(ctx, x, y, z, id, name){
+        super(ctx, x, y, z, id, name);
         document.getElementsByTagName('canvas')[0].addEventListener('mousemove',(x)=>{
             //Traslating x and z coordinate on the basis of mouse movement;
             this.batPosition.x = x.x - CANVAS_WIDTH/2;

@@ -3,8 +3,8 @@ import { BOARD, BOARD_LENGTH, DISTANCE_TO_BOARD } from '../constants/board.js';
 import { CHECK_BALL_TIMER } from '../constants/constants.js';
 
 export class Bot extends Player{
-    constructor(ctx, x, y, z, id, ball){
-        super(ctx, x, y ,z, id)
+    constructor(ctx, x, y, z, id, name, ball){
+        super(ctx, x, y ,z, id, name);
         this.ball = ball;
         this.dX = 0;
         this.dY = 0;

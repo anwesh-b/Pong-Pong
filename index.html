@@ -3,13 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="./favicon.ico" href="demo_icon.gif" >
     <title>Pong Pong</title>
 </head>
 <body>
+    <div class="dashboard-container">
+        <div class="dashboard">
+            <div id="setting-icon">
+                <a><img src="./assets/settings.png"></a>
+            </div>
+            <div class="main-dashboard">
+                <div id="title">
+                    Pong Pong
+                </div>
+                <ul>
+                    <li><img src="./assets/bot.png">vs Henry</li>
+                    <li><img src="./assets/multiplayer.png">vs Friends</li>
+                </ul>
+            </div>
+        </div>
+        <div class="setting-container">
+            <div id="back-settings">
+                <button>Back</button>
+            </div>
+            <div class="settings"> 
+            <div id="title">
+                Settings
+            </div>
+            <ul>
+                <li>Player Name <input></li>
+                <li>
+                    Best Of 
+                    <input type="radio" value="1" id="one" name="bestOf">
+                    <label for="one">1</label> 
+                    <input type="radio" value="3" id="three" name="bestOf">
+                    <label for="three">3</label>
+                    <input type="radio" value="5" id="five" name="bestOf">
+                    <label for="five">5</label>
+                </li>
+                <li>
+                    Game At
+                    <input type="radio" value="6" id="six" name="gameAt">
+                    <label for="six">6</label> 
+                    <input type="radio" value="11" id="eleven" name="gameAt">
+                    <label for="eleven">11</label>
+                    <input type="radio" value="21" id="twentyOne" name="gameAt">
+                    <label for="twentyOne">21</label>
+                </li>
+                <li>Stadium</li>
+            </ul>
+            <button>Save</button>
+        </div>
+        </div>
+        
+    </div>
     <div id="ping-pong-container"></div>
     
-    <script src="./js/index.js" type="module"></script>
+    <script src="./js/main.js" type="module"></script>
+    <!-- <script src="./js/index.js" type="module"></script> -->
 </body>
 </html>

@@ -3,9 +3,10 @@ import { get2dCoordinate } from '../utils.js';
 import { BAT_HEIGHT, BAT_WIDTH } from '../constants/constants.js';
 
 export class Player{
-    constructor(ctx, x, y, z, id){
+    constructor(ctx, x, y, z, id, name){
         this.ctx = ctx;
         this.playerId = id;
+        this.name = name;
         this.bat = new Image();
         this.bat.src = './assets/bat.png';
         this.batPosition = {x:x, y:y, z:z};
