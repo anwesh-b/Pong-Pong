@@ -1,8 +1,11 @@
+body{
+    background-color: rgb(168, 224, 247);
+}
+
 .dashboard-container{
     display: block;
     width: 100vw;
     min-height: 100vh;
-    background-color: rgb(168, 224, 247);
     font-family: 'Comic Sans MS';
 }
 
@@ -42,6 +45,14 @@
     width: fit-content;
 }
 
+.main-dashboard ul{
+    margin-top: 50px;
+}
+
+.main-dashboard #title{
+    padding-top: 50px;
+}
+
 .main-dashboard ul li{
     width: 200px;
     text-align: center;
@@ -49,7 +60,7 @@
     border-radius: 30px; 
     padding: 10px;    
     display: inline-block;    
-    border: solid 2px ;                  
+    border: solid 2px ; 
 }
 
 .setting-container{
@@ -64,12 +75,37 @@
     text-align: center;
 }
 
+.settings #title{
+    padding-top: 50px;
+}
+
+
 #back-settings{
+    margin: 10px 0 0 10px;
     float: left;
 }
 
+#back-settings button{
+    border: solid 2px;
+    font-weight: 600;
+    padding: 4px 8px;
+    background-color: rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+#back-settings button:hover{
+    border: none;
+    border: solid 2px rgba(0,0,0,0.1);
+    /* padding: 6px 10px; */
+    background-color: rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
+
+
 .settings ul{
     list-style-type: none;
+    margin-top: 25px;
 }
 
 .settings li{
@@ -79,4 +115,28 @@
 
 .ping-pong-container{
     display: none;
+}
+
+.postGameContainer{
+    display: none;
+    text-align: center;
+    font-family: 'Comic Sans MS';
+    font-size: 50px;
+    width: 100%;
+    margin-top: 20%;
+}
+
+.postGameContainer #play-again{
+    border: solid 2px;
+    margin: 0 auto;
+    width: 120px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    background-color: rgb(240, 239, 239);
+    font-size: 20px;
+}
+
+.postGameContainer #play-again img{
+    height: 20px;
+    width: 20px;
 }

@@ -7,7 +7,7 @@ import { BOARD, DISTANCE_TO_BOARD } from './constants/board.js';
 import { CANVAS_HEIGHT, CANVAS_WIDTH, BALL_RESET_POS, SPEED_AFTER_BOUNCE } from './constants/constants.js';
 
 export class Game{
-    constructor(gameContainer, gameAt, p1Name, p2Name){
+    constructor(gameContainer, gameAt, serveChangeAt, p1Name, p2Name){
         gameContainer.innerHTML = '<canvas></canvas>'
         this.canvas = gameContainer.getElementsByTagName('canvas')[0];
         this.ctx = this.canvas.getContext('2d');
@@ -30,7 +30,7 @@ export class Game{
         
         this.isPaused = false;
         this.currentServe = 0;
-        this.maxServe = 2;
+        this.maxServe = serveChangeAt;
         this.scoreBoard = new Scoreboard( this.ctx, this.player1, this.botPlayer );
         this.runGame();
         this.winner = null;
@@ -62,8 +62,8 @@ export class Game{
         if(this.ball.scoreTo != undefined) this.players[this.ball.scoreTo].score++;
         if( this.players[0].score >= this.gameOverScore || this.players[1].score >= this.gameOverScore ) {
             this.gameOver = true;
-            if (this.players[0].score> this.players[1].score) gameEnd(this.players[0].playerId);
-            else this.gameEnd(this.players[1].playerId);
+            if (this.players[0].score> this.players[1].score) gameEnd(this.players[0].name);
+            else this.gameEnd(this.players[1].name);
         }   
         this.isPaused = true;
         this.ball.isInvalid = false;
@@ -90,6 +90,5 @@ export class Game{
 
     gameEnd(winner){
         this.winner = winner;
-        console.log(`Player ${winner} won`);
     }
 }

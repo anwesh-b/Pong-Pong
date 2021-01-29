@@ -1,4 +1,4 @@
-import { Game } from "./game.js";
+import { TableTennis } from './main.js';
 
-export const gameContainer = document.getElementById('ping-pong-container');
-// const game = new Game(gameContainer);
+const ttContainer = document.querySelector('.tabletenniscontainer');
+const TT = new TableTennis(ttContainer);
