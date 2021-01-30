@@ -9,7 +9,7 @@ export class TableTennis{
         this.settingButton = this.dashBoard.querySelector('#setting-icon');
         this.gameModes = this.dashBoard.querySelector('ul').querySelectorAll('li');
         this.settingContainer = document.querySelector('.setting-container');
-        this.settingMenu = this.settingContainer.querySelector('.settings').querySelector('ul').querySelectorAll('li');
+        this.settingMenu = this.settingContainer.querySelector('.settings').querySelector('table').querySelectorAll('tr');
         this.saveButton = this.settingContainer.querySelector('.settings').querySelector('button');
         this.backButton = document.querySelector('#back-settings');
         this.postGameContainer = document.querySelector('.postGameContainer');

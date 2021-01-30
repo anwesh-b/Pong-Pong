@@ -22,35 +22,47 @@ export const GameLayout = `
             <div id="title">
                 Settings
             </div>
-            <ul>
-                <li>Player Name&nbsp;&nbsp;&nbsp; <input></li>
-                <li>
-                    Best Of  (in progress)&nbsp;&nbsp;&nbsp;
-                    <input type="radio" value="1" id="one" name="bestOf">
-                    <label for="one">1</label> 
-                    <input type="radio" value="3" id="three" name="bestOf">
-                    <label for="three">3</label>
-                    <input type="radio" value="5" id="five" name="bestOf">
-                    <label for="five">5</label>
-                </li>
-                <li>
-                    Game At&nbsp;&nbsp;&nbsp;
-                    <input type="radio" value="6" id="sixPoints" name="gameAt">
-                    <label for="sixPoints">6</label> 
-                    <input type="radio" value="11" id="elevenPoints" name="gameAt">
-                    <label for="elevenPoints">11</label>
-                    <input type="radio" value="21" id="twentyOnePoints" name="gameAt">
-                    <label for="twentyOnePoints">21</label>
-                </li>
-                <li>
-                    Serve Change At&nbsp;&nbsp;&nbsp;
-                    <input type="radio" value="2" id="twoServe" name="serveChangeAt">
-                    <label for="twoServe">2</label> 
-                    <input type="radio" value="5" id="fiveServe" name="serveChangeAt">
-                    <label for="fiveServe">5</label>
-                </li>
-                <li>Stadium  (in progress)</li>
-            </ul>
+            <table>
+                <tr>
+                <td>Player Name</td>
+                <td><input placeholder="Player 1"></td>
+                </tr>
+                <tr>
+                    <td> Best Of  (in progress) </td>
+                    <td>
+                        <input type="radio" value="1" id="one" name="bestOf">
+                        <label for="one">1</label> 
+                        <input type="radio" value="3" id="three" name="bestOf">
+                        <label for="three">3</label>
+                        <input type="radio" value="5" id="five" name="bestOf">
+                        <label for="five">5</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Game At</td>
+                    <td>
+                        <input type="radio" value="6" id="sixPoints" name="gameAt">
+                        <label for="sixPoints">6</label> 
+                        <input type="radio" value="11" id="elevenPoints" name="gameAt">
+                        <label for="elevenPoints">11</label>
+                        <input type="radio" value="21" id="twentyOnePoints" name="gameAt">
+                        <label for="twentyOnePoints">21</label>
+                    </td>    
+                </tr>
+                <tr>
+                    <td>Serve Change At</td>
+                    <td>
+                        <input type="radio" value="2" id="twoServe" name="serveChangeAt">
+                        <label for="twoServe">2</label> 
+                        <input type="radio" value="5" id="fiveServe" name="serveChangeAt">
+                        <label for="fiveServe">5</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Stadium  (in progress)</td>
+                    <td></td>
+                </tr>
+            </table>
             <button>Save</button>
         </div>
     </div>    

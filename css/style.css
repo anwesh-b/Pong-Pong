@@ -102,15 +102,44 @@ body{
     transition: 0.3s;
 }
 
-
-.settings ul{
-    list-style-type: none;
-    margin-top: 25px;
+.settings table{
+    margin: 0 auto;
 }
 
-.settings li{
+.settings td{
     text-align: left;
-    padding: 5px;
+    padding: 3px 20px 3px 10px;
+}
+
+.settings>button{
+    margin-top: 10px;
+    padding: 7px 30px;
+    font-size: 20px;
+    color: #ffffff;
+    background: rgba(100, 100, 100, 0.8);
+    border: 0px;
+    transition: 1s;
+}
+
+.settings>button:hover{
+    background: rgba(100, 100, 100, 1);
+    transition: 1s;
+}
+
+.settings table{
+    margin-top: 40px;
+    border: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-collapse: collapse;
+}
+
+.settings td, .settings th {
+    border: 1px solid black;
+  }
+
+.settings table input{
+    border: 0px;
+    background: none
 }
 
 .ping-pong-container{
