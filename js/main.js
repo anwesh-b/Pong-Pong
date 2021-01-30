@@ -18,8 +18,8 @@ export class TableTennis{
 
         this.game = null;
         this.playerName = localStorage.getItem('playerName') || 'Player 1';
-        this.gameAt = localStorage.getItem('gameAt') || 11;
-        this.changeServeAt = localStorage.getItem('changeServeAt') || 2;
+        this.gameAt = localStorage.getItem('gameAt') || '11';
+        this.changeServeAt = localStorage.getItem('changeServeAt') || '2';
 
         this.setAllEventListeners();
     }
