@@ -65,21 +65,13 @@ export class Ball{
             this.bounches++;
             this.dY = this.speedAfterBounche;
             // Check if the position touched is valid or not 
-            if( this.bounches <= 1 && 
-                (   this.position.z < this.lastPlayerTouched*BOARD.LENGTH/2 + DISTANCE_TO_BOARD ||
-                    this.position.z > (1 + this.lastPlayerTouched)*BOARD.LENGTH/2 + DISTANCE_TO_BOARD))
-            {         
+            if( this.bounches <= 1 && this.isValidServeBounche()){         
                 this.isInvalid = true;
                 this.scoreTo = 1-this.lastPlayerTouched;
             }
             else if(this.bounches>1){
-                if( this.position.z < (1-this.lastPlayerTouched) * BOARD.LENGTH/2 + DISTANCE_TO_BOARD ||
-                    this.position.z > (2-this.lastPlayerTouched) * BOARD.LENGTH/2 + DISTANCE_TO_BOARD )
-                {
-                    this.isInvalid = true;
-                } else{
-                    this.scoreTo = this.lastPlayerTouched;
-                }
+                if( this.isValidBounche()) this.isInvalid = true;
+                else this.scoreTo = this.lastPlayerTouched;
             }
         }
         this.position.x += this.dX;
@@ -120,5 +112,21 @@ export class Ball{
         this.position.x = BALL_RESET_POS[id].x
         this.position.y = BALL_RESET_POS[id].y
         this.position.z = BALL_RESET_POS[id].z
+    }
+    
+    isValidServeBounche(){
+        if ( this.position.z < this.lastPlayerTouched*BOARD.LENGTH/2 + DISTANCE_TO_BOARD || 
+            this.position.z > (1 + this.lastPlayerTouched)*BOARD.LENGTH/2 + DISTANCE_TO_BOARD){
+                return true;
+            }
+        else return false;
+    }
+
+    isValidBounche(){
+        if( this.position.z < (1-this.lastPlayerTouched) * BOARD.LENGTH/2 + DISTANCE_TO_BOARD ||
+            this.position.z > (2-this.lastPlayerTouched) * BOARD.LENGTH/2 + DISTANCE_TO_BOARD ){
+                return true;
+            }
+        else return false;
     }
 }

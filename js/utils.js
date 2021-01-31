@@ -19,9 +19,6 @@ export function get2dCoordinate (position) {
   let x2d = xWithRespectToCam  * PLAYER_PROJECTOR.viewerPosition.z / zWithRespectToCam + PLAYER_PROJECTOR.viewerPosition.x;
   let y2d = yWithRespectToCam  * PLAYER_PROJECTOR.viewerPosition.z / zWithRespectToCam + PLAYER_PROJECTOR.viewerPosition.y;
 
-  // let x2d = (( position.x- PLAYER_PROJECTOR.cameraPosition.x)*((position.z-PLAYER_PROJECTOR.cameraPosition.z)/position.z))  + PLAYER_PROJECTOR.cameraPosition.x;
-  // let y2d = (( position.y- PLAYER_PROJECTOR.cameraPosition.y)*((position.z-PLAYER_PROJECTOR.cameraPosition.z)/position.z))  + PLAYER_PROJECTOR.cameraPosition.y;
-
   // let x2d = position.x/position.z ;
   // let y2d = position.y/position.z ;
 

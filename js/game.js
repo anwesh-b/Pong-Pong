@@ -60,7 +60,7 @@ export class Game{
 
     resetToServe(){
         if(this.ball.scoreTo != undefined) this.players[this.ball.scoreTo].score++;
-        if( this.players[0].score >= this.gameOverScore || this.players[1].score >= this.gameOverScore ) {
+        if( this.checkWonOrNot(this.players[0]) || this.checkWonOrNot(this.players[1]) ) {
             this.gameOver = true;
             if (this.players[0].score> this.players[1].score) gameEnd(this.players[0].name);
             else this.gameEnd(this.players[1].name);
@@ -90,5 +90,10 @@ export class Game{
 
     gameEnd(winner){
         this.winner = winner;
+    }
+
+    checkWonOrNot(player){
+        if (player.score >= this.gameOverScore) return true;
+        return false        
     }
 }
