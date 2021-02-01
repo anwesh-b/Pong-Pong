@@ -7,13 +7,25 @@ import { BOARD, DISTANCE_TO_BOARD } from './constants/board.js';
 import { CANVAS_HEIGHT, CANVAS_WIDTH, BALL_RESET_POS, SPEED_AFTER_BOUNCE } from './constants/constants.js';
 
 export class Game{
-    constructor(gameContainer, gameAt, serveChangeAt, p1Name, p2Name){
-        gameContainer.innerHTML = '<canvas></canvas>'
-        this.canvas = gameContainer.getElementsByTagName('canvas')[0];
-        this.ctx = this.canvas.getContext('2d');
-        this.canvas.height = CANVAS_HEIGHT;
-        this.canvas.width = CANVAS_WIDTH;
-        
+    constructor(gameContainer, gameMode, gameAt, serveChangeAt, p1Name, p2Name){
+        this.gameMode = gameMode;
+        if(this.gameMode === 0){
+            gameContainer.innerHTML = `
+                <canvas></canvas>
+            `
+        }else if(this.gameMode === 1){
+            gameContainer.innerHTML = `
+                <canvas></canvas>
+                <canvas></canvas>
+            `        
+        }
+        this.canvas = gameContainer.querySelectorAll('canvas');
+        this.ctx = [];
+        this.canvas.forEach((x)=>{
+            this.ctx.push(x.getContext('2d'));
+            x.height = CANVAS_HEIGHT;
+            x.width = CANVAS_WIDTH;
+        })
         this.gameOver = false;
         this.gameOverScore = gameAt;
         //First serve player
@@ -44,16 +56,20 @@ export class Game{
             this.botPlayer.serve();
             this.isPaused = false;
         }
-        this.ctx.fillStyle = "white";
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.forEach((x, index)=>{
+            x.fillStyle = "#ffffff";
+            x.fillRect(0, 0, this.canvas[index].width, this.canvas[index].height);
+        })
         this.ball.moveBall();
-        if(this.ball.position.z > this.botPlayer.batPosition.z) this.ball.drawBall();
-        if(this.ball.position.y >= BOARD.HEIGHT ) this.ball.drawBall();
-        this.botPlayer.drawBat();
+        if(this.ball.position.z > this.botPlayer.batPosition.z || this.ball.position.y >= BOARD.HEIGHT ) this.ball.drawBall();
+        this.ctx.forEach((x, index)=>{
+            this.players[1-index].drawBat(index);
+        })
         this.board.drawBoard();
-        if ( this.ball.position.y <= BOARD.HEIGHT && 
-            this.ball.position.z <= this.botPlayer.batPosition.z) this.ball.drawBall();
-        this.player1.drawBat();
+        if ( this.ball.position.y <= BOARD.HEIGHT && this.ball.position.z <= this.botPlayer.batPosition.z) this.ball.drawBall();
+        this.ctx.forEach((x, index)=>{
+            this.players[index].drawBat(index);
+        })
         this.scoreBoard.displayScores();
         if(!this.gameOver) requestAnimationFrame(this.runGame.bind(this));
     }

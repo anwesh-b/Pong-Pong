@@ -12,15 +12,17 @@ export class Scoreboard{
     }
 
     displayScores(){
-        this.ctx.font = "16px Comic Sans MS";
-        this.ctx.fillStyle = "red";
-        this.ctx.textAlign = "center";
-        this.ctx.fillText(this.player2.name, this.left, this.top-100);
-        this.ctx.font = "30px Comic Sans MS";
-        this.ctx.fillText(this.player2.score, this.left, this.top-50);
-        this.ctx.fillText(this.player1.score, this.left, this.top);
-        this.ctx.font = "16px Comic Sans MS";
-        this.ctx.fillText(this.player1.name, this.left, this.top+50);
+        this.ctx.forEach(( x, index) => {
+            x.font = "16px Comic Sans MS";
+            x.fillStyle = "red";
+            x.textAlign = "center";
+            x.fillText(this.player2.name, this.left, this.top-100 + index*150);
+            x.font = "30px Comic Sans MS";
+            x.fillText(this.player2.score, this.left, this.top-50 + index*50);
+            x.fillText(this.player1.score, this.left, this.top - index*50);
+            x.font = "16px Comic Sans MS";
+            x.fillText(this.player1.name, this.left, this.top+50 - index*150);                
+        });
         // this.ctx.beginPath();
         // this.ctx.moveTo( this.left+30, this.top);
         // this.ctx.lineTo( this.left+this.width+30, this.top);

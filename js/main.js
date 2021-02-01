@@ -42,7 +42,7 @@ export class TableTennis{
             x.addEventListener('click',()=>{
                 this.dashBoardContainer.style.display = 'none';
                 this.gameContainer.style.display = 'block';
-                this.game = new Game(this.gameContainer, this.gameAt, this.changeServeAt, this.playerName, "Henry");
+                this.game = new Game(this.gameContainer, index, this.gameAt, this.changeServeAt, this.playerName, "Henry");
                 this.checkGameOver();
             })
         })
@@ -62,7 +62,6 @@ export class TableTennis{
             this.dashBoardContainer.style.display = 'block';
             this.dashBoard.style.display ='block';
         })
-    
     }
     
     
@@ -143,9 +142,12 @@ export class TableTennis{
             case 3:         //Change Serve At
                 let temp3 = x.querySelectorAll('input');
                 temp3.forEach((y)=>{
-                    this.changeServeAt = y.value;
-                    localStorage.setItem('changeServeAt', this.changeServeAt);
-                    return;
+                    if(y.checked){
+                        this.changeServeAt = y.value;
+                        localStorage.setItem('changeServeAt', this.changeServeAt);
+                        console.log(this.changeServeAt);
+                        return;
+                    }
                 })
                 break;
             case 4:         //Stadium

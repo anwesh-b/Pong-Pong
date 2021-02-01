@@ -1,4 +1,4 @@
-import { BOARD, DISTANCE_TO_BOARD } from '../constants/board.js';
+import { BOARD, DISTANCE_TO_BOARD, BOARD_LENGTH } from '../constants/board.js';
 import { get2dCoordinate } from '../utils.js';
 import { BAT_HEIGHT, BAT_WIDTH } from '../constants/constants.js';
 
@@ -10,18 +10,34 @@ export class Player{
         this.bat = new Image();
         this.bat.src = './assets/bat.png';
         this.batPosition = {x:x, y:y, z:z};
-        this.bat2dPosition = get2dCoordinate(this.batPosition);
+        // this.bat2dPosition = get2dCoordinate(this.batPosition);
         this.serveState = false;    
         this.score = 0;    
     }
-    drawBat(){
-        this.bat2dPosition = get2dCoordinate(this.batPosition);
-        let batHeightWidth = get2dCoordinate({x: this.batPosition.x + BAT_WIDTH, y:  this.batPosition.y + BAT_HEIGHT, z: this.batPosition.z})
-        let batWidth = Math.abs(batHeightWidth.x2d - this.bat2dPosition.x2d)
-        let batHeight = Math.abs(batHeightWidth.y2d - this.bat2dPosition.y2d)
-        this.ctx.globalAlpha = 0.7;
-        this.ctx.drawImage(this.bat, this.bat2dPosition.x2d - batWidth /2 , this.bat2dPosition.y2d - (batHeight /2), batWidth, batHeight);
-        this.ctx.globalAlpha = 1;
+    drawBat(index){
+        let bat2dPosition = 0;
+        let batHeightWidth = 0;
+        let batWidth = 0;
+        let batHeight = 0;
+        switch(index){
+            case 0:
+                bat2dPosition = get2dCoordinate(this.batPosition);
+                batHeightWidth = get2dCoordinate({x: this.batPosition.x + BAT_WIDTH, y:  this.batPosition.y + BAT_HEIGHT, z: this.batPosition.z});
+                batWidth = Math.abs(batHeightWidth.x2d - bat2dPosition.x2d);
+                batHeight = Math.abs(batHeightWidth.y2d - bat2dPosition.y2d);
+                break;
+            case 1:
+                bat2dPosition = get2dCoordinate({x: -1*this.batPosition.x , y:  this.batPosition.y , z: DISTANCE_TO_BOARD + BOARD_LENGTH/2 - 1 * (this.batPosition.z - DISTANCE_TO_BOARD - BOARD_LENGTH/2) });
+                batHeightWidth = get2dCoordinate({x: -1*this.batPosition.x + BAT_WIDTH, y:  this.batPosition.y + BAT_HEIGHT, z: DISTANCE_TO_BOARD + BOARD_LENGTH/2 - 1 * (this.batPosition.z - DISTANCE_TO_BOARD - BOARD_LENGTH/2) });
+                batWidth = Math.abs(batHeightWidth.x2d - bat2dPosition.x2d);
+                batHeight = Math.abs(batHeightWidth.y2d - bat2dPosition.y2d);
+                break;
+            default:
+                break;
+        }
+        this.ctx[index].globalAlpha = 0.7;
+        this.ctx[index].drawImage(this.bat, bat2dPosition.x2d - batWidth /2 , bat2dPosition.y2d - (batHeight /2), batWidth, batHeight);
+        this.ctx[index].globalAlpha = 1;     
     }
 
     detectBallCollision(ball){

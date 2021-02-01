@@ -1,6 +1,6 @@
 import { get2dCoordinate } from './utils.js';
 import { BALL_RESET_POS } from './constants/constants.js';
-import { DISTANCE_TO_BOARD, BOARD, BOARD_COORDINATE } from './constants/board.js';
+import { DISTANCE_TO_BOARD, BOARD, BOARD_COORDINATE, BOARD_LENGTH } from './constants/board.js';
 import { ACCELERATION_DUE_TO_GRAVITY, 
             SPEED_AFTER_BOUNCE, 
             INITIAL_DX, 
@@ -23,29 +23,60 @@ export class Ball{
         this.lastPlayerTouched = null;
         this.isBeingServed = true;
         this.speedAfterBounche = SPEED_AFTER_BOUNCE;
-        this.position2d = get2dCoordinate(this.position);
+        // this.position2d = get2dCoordinate(this.position);
         this.bounches = 0;
         this.scoreTo = null;
     }
 
     drawBall(){
-        this.position2d = get2dCoordinate(this.position);
-        this.currentRadius = this.position2d.x2d - get2dCoordinate({ x: this.position.x + BOARD.BALL_RADIUS, y: this.position.y, z: this.position.z}).x2d;
-        this.ctx.beginPath();
-        this.ctx.arc(this.position2d.x2d, this.position2d.y2d, Math.abs(this.currentRadius), 0, 2 * Math.PI);
-        this.ctx.fillStyle = 'white'
-        this.ctx.fill();
-        this.ctx.stroke();
+        this.ctx.forEach((x, index ) => {
+            let position2d = 0;
+            switch(index){
+                case 0:
+                    position2d = get2dCoordinate({x:this.position.x, y:this.position.y, z: this.position.z});
+                    this.currentRadius = position2d.x2d - get2dCoordinate({ x: this.position.x + BOARD.BALL_RADIUS, y: this.position.y, z: this.position.z}).x2d;
+                    break;
+                case 1:
+                    position2d = get2dCoordinate({x: -1* this.position.x, y:this.position.y, z: DISTANCE_TO_BOARD + BOARD_LENGTH/2 - 1 * (this.position.z - DISTANCE_TO_BOARD - BOARD_LENGTH/2)});
+                    this.currentRadius = position2d.x2d - get2dCoordinate({ x: -1* this.position.x + BOARD.BALL_RADIUS, y: this.position.y, z: DISTANCE_TO_BOARD + BOARD_LENGTH/2 - 1 * (this.position.z - DISTANCE_TO_BOARD - BOARD_LENGTH/2) }).x2d;
+                    break;
+                default:
+                    break;
+            }
+            x.beginPath();
+            x.arc(position2d.x2d, position2d.y2d, Math.abs(this.currentRadius), 0, 2 * Math.PI);
+            x.fillStyle = 'white'
+            x.fill();
+            x.stroke();
+        });
         if (this.ballAboveBoard()) this.drawShadow();
     }
 
     drawShadow(){
-        let shadowPos = { x: this.position.x, y: BOARD.HEIGHT, z: this.position.z };
-        var shadow = get2dCoordinate(shadowPos);
-        this.ctx.beginPath();
-        this.ctx.arc(shadow.x2d, shadow.y2d, Math.abs(this.currentRadius), 0, 2 * Math.PI);
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.21)'
-        this.ctx.fill();
+        this.ctx.forEach((x,index) => {
+            let shadowPos = 0;
+            let shadow = get2dCoordinate(shadowPos);
+            switch(index){
+                case 0:
+                    shadowPos = { x: this.position.x, y: BOARD.HEIGHT, z: this.position.z };
+                    shadow = get2dCoordinate(shadowPos);
+                    this.currentRadius = shadow.x2d - get2dCoordinate({ x: this.position.x + BOARD.BALL_RADIUS, y: this.position.y, z: this.position.z }).x2d;
+                    break;
+                case 1:
+                    shadowPos = { x: -1*this.position.x, y: BOARD.HEIGHT, z: DISTANCE_TO_BOARD + BOARD_LENGTH/2 - 1 * (this.position.z - DISTANCE_TO_BOARD - BOARD_LENGTH/2) };
+                    shadow = get2dCoordinate(shadowPos);
+                    this.currentRadius = shadow.x2d - get2dCoordinate({ x: -1* this.position.x + BOARD.BALL_RADIUS, y: this.position.y, z: DISTANCE_TO_BOARD + BOARD_LENGTH/2 - 1 * (this.position.z - DISTANCE_TO_BOARD - BOARD_LENGTH/2) }).x2d;
+                    break;
+                default:
+                    break;
+            }
+            
+            x.beginPath();
+            x.arc(shadow.x2d, shadow.y2d, Math.abs(this.currentRadius), 0, 2 * Math.PI);
+            x.fillStyle = 'rgba(0, 0, 0, 0.21)'
+            x.fill();    
+        });
+        
     }
 
     ballAboveBoard(){

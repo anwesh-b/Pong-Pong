@@ -36,17 +36,19 @@ export class Board{
     }
 
     drawStand(upper,lower){
-        this.ctx.beginPath();
-        this.ctx.moveTo(upper.x2d + (BOARD_STAND_WIDTH/2), upper.y2d);
-        this.ctx.lineTo(upper.x2d - (BOARD_STAND_WIDTH/2), upper.y2d);
-        this.ctx.lineTo(lower.x2d - (BOARD_STAND_WIDTH/2), lower.y2d);
-        this.ctx.lineTo(lower.x2d + (BOARD_STAND_WIDTH/2), lower.y2d);
-        this.ctx.closePath();
-        this.ctx.fillStyle = 'brown';
-        this.ctx.fill();
-        this.ctx.beginPath();
-        this.ctx.arc(lower.x2d, lower.y2d, BOARD_STAND_WIDTH/2 , 0, 2*Math.PI);
-        this.ctx.fill();
+        this.ctx.forEach((x) => {
+            x.beginPath();
+            x.moveTo(upper.x2d + (BOARD_STAND_WIDTH/2), upper.y2d);
+            x.lineTo(upper.x2d - (BOARD_STAND_WIDTH/2), upper.y2d);
+            x.lineTo(lower.x2d - (BOARD_STAND_WIDTH/2), lower.y2d);
+            x.lineTo(lower.x2d + (BOARD_STAND_WIDTH/2), lower.y2d);
+            x.closePath();
+            x.fillStyle = 'brown';
+            x.fill();
+            x.beginPath();
+            x.arc(lower.x2d, lower.y2d, BOARD_STAND_WIDTH/2 , 0, 2*Math.PI);
+            x.fill();
+        });
     }
 
     drawStands(){
@@ -57,89 +59,92 @@ export class Board{
     }
 
     drawMainBoard(){
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.leftBot.x2d, this.leftBot.y2d);
-        this.ctx.lineTo(this.rightBot.x2d, this.rightBot.y2d);
-        this.ctx.lineTo(this.rightTop.x2d, this.rightTop.y2d);
-        this.ctx.lineTo(this.leftTop.x2d, this.leftTop.y2d);
-        this.ctx.closePath();
-        this.ctx.stroke();
-        this.ctx.fillStyle = 'white';
-        this.ctx.fill();
-        return;
+        this.ctx.forEach((x) => {
+            x.beginPath();
+            x.moveTo(this.leftBot.x2d, this.leftBot.y2d);
+            x.lineTo(this.rightBot.x2d, this.rightBot.y2d);
+            x.lineTo(this.rightTop.x2d, this.rightTop.y2d);
+            x.lineTo(this.leftTop.x2d, this.leftTop.y2d);
+            x.closePath();
+            x.stroke();
+            x.fillStyle = 'white';
+            x.fill();
+            return;
+        });
     }
 
     drawBlueBoard(){
-        //Left Side of Board
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.innerLeftBot.x2d, this.innerLeftBot.y2d);
-        this.ctx.lineTo(this.innerLeftTop.x2d, this.innerLeftTop.y2d);
-        this.ctx.lineTo(this.innerMidLeftTop.x2d, this.innerMidLeftTop.y2d);
-        this.ctx.lineTo(this.innerMidLeftBot.x2d, this.innerMidLeftBot.y2d);
-        this.ctx.closePath();
-        this.ctx.fillStyle = '#1672A7';
-        this.ctx.fill();
+        this.ctx.forEach((x) => {
+            //Left Side of Board
+            x.beginPath();
+            x.moveTo(this.innerLeftBot.x2d, this.innerLeftBot.y2d);
+            x.lineTo(this.innerLeftTop.x2d, this.innerLeftTop.y2d);
+            x.lineTo(this.innerMidLeftTop.x2d, this.innerMidLeftTop.y2d);
+            x.lineTo(this.innerMidLeftBot.x2d, this.innerMidLeftBot.y2d);
+            x.closePath();
+            x.fillStyle = '#1672A7';
+            x.fill();
 
-        //Right Side of Board
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.innerMidRightTop.x2d, this.innerMidRightTop.y2d);
-        this.ctx.lineTo(this.innerMidRightBot.x2d, this.innerMidRightBot.y2d);
-        this.ctx.lineTo(this.innerRightBot.x2d, this.innerRightBot.y2d);
-        this.ctx.lineTo(this.innerRightTop.x2d, this.innerRightTop.y2d);
-        this.ctx.closePath();
-        this.ctx.fillStyle = '#1672A7';
-        this.ctx.fill();
+            //Right Side of Board
+            x.beginPath();
+            x.moveTo(this.innerMidRightTop.x2d, this.innerMidRightTop.y2d);
+            x.lineTo(this.innerMidRightBot.x2d, this.innerMidRightBot.y2d);
+            x.lineTo(this.innerRightBot.x2d, this.innerRightBot.y2d);
+            x.lineTo(this.innerRightTop.x2d, this.innerRightTop.y2d);
+            x.closePath();
+            x.fillStyle = '#1672A7';
+            x.fill();
+        });
     }
 
     drawNet(){
-        let netTop = 3;
-        let netSides = 3;
-        let veeticalLines = 50;
-        let horiontelLines = 5;
-        //Net Top
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.netLeftTop.x2d+netSides, this.netLeftTop.y2d);
-        this.ctx.lineTo(this.netLeftTop.x2d+netSides, this.netLeftTop.y2d+netTop);
-        this.ctx.lineTo(this.netRightTop.x2d-netSides, this.netRightTop.y2d+netTop);
-        this.ctx.lineTo(this.netRightTop.x2d-netSides, this.netRightTop.y2d);
-        this.ctx.closePath();
-        this.ctx.fillStyle = 'white';
-        this.ctx.fill();
-        // this.ctx.strokeStyle = 'red';
-        this.ctx.stroke();
+        this.ctx.forEach((x) => {
+            let netTop = 3;
+            let netSides = 3;
+            //Net Top
+            x.beginPath();
+            x.moveTo(this.netLeftTop.x2d+netSides, this.netLeftTop.y2d);
+            x.lineTo(this.netLeftTop.x2d+netSides, this.netLeftTop.y2d+netTop);
+            x.lineTo(this.netRightTop.x2d-netSides, this.netRightTop.y2d+netTop);
+            x.lineTo(this.netRightTop.x2d-netSides, this.netRightTop.y2d);
+            x.closePath();
+            x.fillStyle = 'white';
+            x.fill();
+            // x.strokeStyle = 'red';
+            x.stroke();
 
-        //Net Left Side
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.netLeftTop.x2d, this.netLeftTop.y2d);
-        this.ctx.lineTo(this.netLeftBot.x2d, this.netLeftBot.y2d);
-        this.ctx.lineTo(this.netLeftBot.x2d+netSides, this.netLeftBot.y2d);
-        this.ctx.lineTo(this.netLeftTop.x2d+netSides, this.netLeftTop.y2d);
-        this.ctx.closePath();
-        this.ctx.fillStyle = 'black';
-        this.ctx.fill();
-        this.ctx.stroke();
+            //Net Left Side
+            x.beginPath();
+            x.moveTo(this.netLeftTop.x2d, this.netLeftTop.y2d);
+            x.lineTo(this.netLeftBot.x2d, this.netLeftBot.y2d);
+            x.lineTo(this.netLeftBot.x2d+netSides, this.netLeftBot.y2d);
+            x.lineTo(this.netLeftTop.x2d+netSides, this.netLeftTop.y2d);
+            x.closePath();
+            x.fillStyle = 'black';
+            x.fill();
+            x.stroke();
 
-        //Net Right Side
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.netRightTop.x2d, this.netRightTop.y2d);
-        this.ctx.lineTo(this.netRightBot.x2d, this.netRightBot.y2d);
-        this.ctx.lineTo(this.netRightBot.x2d-netSides, this.netRightBot.y2d);
-        this.ctx.lineTo(this.netRightTop.x2d-netSides, this.netRightTop.y2d);
-        this.ctx.closePath();
-        this.ctx.fillStyle = 'black';
-        this.ctx.fill();
-        this.ctx.stroke();
+            //Net Right Side
+            x.beginPath();
+            x.moveTo(this.netRightTop.x2d, this.netRightTop.y2d);
+            x.lineTo(this.netRightBot.x2d, this.netRightBot.y2d);
+            x.lineTo(this.netRightBot.x2d-netSides, this.netRightBot.y2d);
+            x.lineTo(this.netRightTop.x2d-netSides, this.netRightTop.y2d);
+            x.closePath();
+            x.fillStyle = 'black';
+            x.fill();
+            x.stroke();
 
-        //Net Inner Portion
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.netLeftTop.x2d+netSides, this.netRightTop.y2d+netTop);
-        this.ctx.lineTo(this.netLeftBot.x2d+netSides, this.netRightBot.y2d);
-        this.ctx.lineTo(this.netRightBot.x2d-netSides, this.netRightBot.y2d);
-        this.ctx.lineTo(this.netRightTop.x2d-netSides, this.netRightTop.y2d+netTop);
-        this.ctx.closePath();
-        this.ctx.fillStyle = ' rgba(0, 0, 0, 0.2)';
-        this.ctx.fill();
-
+            //Net Inner Portion
+            x.beginPath();
+            x.moveTo(this.netLeftTop.x2d+netSides, this.netRightTop.y2d+netTop);
+            x.lineTo(this.netLeftBot.x2d+netSides, this.netRightBot.y2d);
+            x.lineTo(this.netRightBot.x2d-netSides, this.netRightBot.y2d);
+            x.lineTo(this.netRightTop.x2d-netSides, this.netRightTop.y2d+netTop);
+            x.closePath();
+            x.fillStyle = ' rgba(0, 0, 0, 0.2)';
+            x.fill();
+        });
     }
 
     drawBoard(){
