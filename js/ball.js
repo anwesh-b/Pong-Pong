@@ -60,23 +60,21 @@ export class Ball{
                 case 0:
                     shadowPos = { x: this.position.x, y: BOARD.HEIGHT, z: this.position.z };
                     shadow = get2dCoordinate(shadowPos);
-                    this.currentRadius = shadow.x2d - get2dCoordinate({ x: this.position.x + BOARD.BALL_RADIUS, y: this.position.y, z: this.position.z }).x2d;
+                    this.currentRadius = shadow.x2d - get2dCoordinate({ x: this.position.x + BOARD.BALL_RADIUS, y: BOARD.HEIGHT, z: this.position.z }).x2d;
                     break;
                 case 1:
                     shadowPos = { x: -1*this.position.x, y: BOARD.HEIGHT, z: DISTANCE_TO_BOARD + BOARD_LENGTH/2 - 1 * (this.position.z - DISTANCE_TO_BOARD - BOARD_LENGTH/2) };
                     shadow = get2dCoordinate(shadowPos);
-                    this.currentRadius = shadow.x2d - get2dCoordinate({ x: -1* this.position.x + BOARD.BALL_RADIUS, y: this.position.y, z: DISTANCE_TO_BOARD + BOARD_LENGTH/2 - 1 * (this.position.z - DISTANCE_TO_BOARD - BOARD_LENGTH/2) }).x2d;
+                    this.currentRadius = shadow.x2d - get2dCoordinate({ x: -1* this.position.x + BOARD.BALL_RADIUS, y: BOARD.HEIGHT, z: DISTANCE_TO_BOARD + BOARD_LENGTH/2 - 1 * (this.position.z - DISTANCE_TO_BOARD - BOARD_LENGTH/2) }).x2d;
                     break;
                 default:
                     break;
             }
-            
             x.beginPath();
             x.arc(shadow.x2d, shadow.y2d, Math.abs(this.currentRadius), 0, 2 * Math.PI);
             x.fillStyle = 'rgba(0, 0, 0, 0.21)'
             x.fill();    
         });
-        
     }
 
     ballAboveBoard(){
