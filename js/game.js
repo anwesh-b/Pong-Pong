@@ -29,30 +29,38 @@ export class Game{
         this.gameOver = false;
         this.gameOverScore = gameAt;
         //First serve player
-        this.servePlayer = 0;
+        this.servePlayer = 1;
     
         this.board = new Board(this.ctx);
         this.ball = new Ball(this.ctx, this.board, this.servePlayer);
-        this.player1 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*3/4, 0, p1Name);
-        this.botPlayer = new Bot(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD+BOARD.LENGTH, 1, p2Name, this.ball);
-        this.players = [this.player1, this.botPlayer];
+        if(this.gameMode === 0){
+            this.player1 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*3/4, 0, p1Name, 'mouse');
+            this.botPlayer = new Bot(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD+BOARD.LENGTH, 1, p2Name, this.ball);
+            this.players = [this.player1, this.botPlayer];
+            this.players[this.servePlayer].serveState = true;
+            if ( this.botPlayer.playerId === this.servePlayer ) this.botPlayer.serve();
+        }else if(this.gameMode === 1){
+            this.player1 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*3/4, 0, p1Name, 'mouse');
+            this.player2 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*4.5/5+BOARD.LENGTH, 1, p2Name, 'keyboard');
+            this.players = [this.player1, this.player2];
+            this.players[this.servePlayer].serveState = true;
+        }   
         
-        this.players[this.servePlayer].serveState = true;
-        if ( this.botPlayer.playerId === this.servePlayer ) this.botPlayer.serve();
         
         this.isPaused = false;
         this.currentServe = 0;
         this.maxServe = serveChangeAt;
-        this.scoreBoard = new Scoreboard( this.ctx, this.player1, this.botPlayer );
+        this.scoreBoard = new Scoreboard( this.ctx, this.players[0], this.players[1] );
         this.runGame();
         this.winner = null;
     }
 
     runGame(){
-        this.player1.detectBallCollision(this.ball);
-        this.botPlayer.detectBallCollision(this.ball);
+        this.players.forEach((x)=>{
+            x.detectBallCollision(this.ball);
+        })
         if (this.ball.isInvalid == true) this.resetToServe(); 
-        if (this.servePlayer === this.botPlayer.playerId && this.isPaused) {
+        if (this.gameMode === 0 && this.servePlayer === this.botPlayer.playerId && this.isPaused) {
             this.botPlayer.serve();
             this.isPaused = false;
         }
@@ -61,12 +69,12 @@ export class Game{
             x.fillRect(0, 0, this.canvas[index].width, this.canvas[index].height);
         })
         this.ball.moveBall();
-        if(this.ball.position.z > this.botPlayer.batPosition.z || this.ball.position.y >= BOARD.HEIGHT ) this.ball.drawBall();
+        if(this.ball.position.y >= BOARD.HEIGHT ) this.ball.drawBall();
         this.ctx.forEach((x, index)=>{
             this.players[1-index].drawBat(index);
         })
         this.board.drawBoard();
-        if ( this.ball.position.y <= BOARD.HEIGHT && this.ball.position.z <= this.botPlayer.batPosition.z) this.ball.drawBall();
+        if ( this.ball.position.y < BOARD.HEIGHT ) this.ball.drawBall();
         this.ctx.forEach((x, index)=>{
             this.players[index].drawBat(index);
         })
@@ -92,12 +100,12 @@ export class Game{
         if(this.isPaused){
             this.currentServe++;
             if(this.currentServe >= this.maxServe){
-                if (this.servePlayer === this.player1.playerId) this.servePlayer = this.botPlayer.playerId;
-                else this.servePlayer = this.player1.playerId;
+                if (this.servePlayer === this.players[0].playerId) this.servePlayer = this.players[1].playerId;
+                else this.servePlayer = this.players[0].playerId;
                 this.currentServe = 0;
             }
-            if (this.servePlayer === this.player1.playerId) this.player1.serveState = true;
-            else this.botPlayer.serveState = true;
+            if (this.servePlayer === this.players[0].playerId) this.players[0].serveState = true;
+            else this.players[1].serveState = true;
             this.ball.resetBallPosition(this.servePlayer);
             this.isPaused = false;
         }
