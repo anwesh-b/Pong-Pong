@@ -103,11 +103,11 @@ export class Board{
             let netSides = 3;
             //Net Top
             x.beginPath();
-            x.moveTo(this.netLeftTop.x2d+netSides, this.netLeftTop.y2d);
-            x.lineTo(this.netLeftTop.x2d+netSides, this.netLeftTop.y2d+netTop);
-            x.lineTo(this.netRightTop.x2d-netSides, this.netRightTop.y2d+netTop);
-            x.lineTo(this.netRightTop.x2d-netSides, this.netRightTop.y2d);
-            x.closePath();
+            x.moveTo(this.netLeftTop.x2d-netSides, this.netLeftTop.y2d);
+            x.lineTo(this.netRightTop.x2d+netSides, this.netRightTop.y2d);
+            x.lineTo(this.netRightTop.x2d+netSides, this.netRightTop.y2d+netTop);
+            x.lineTo(this.netLeftTop.x2d-netSides, this.netLeftTop.y2d+netTop);
+            x.lineTo(this.netLeftTop.x2d-netSides, this.netLeftTop.y2d);
             x.fillStyle = 'white';
             x.fill();
             // x.strokeStyle = 'red';
@@ -117,8 +117,8 @@ export class Board{
             x.beginPath();
             x.moveTo(this.netLeftTop.x2d, this.netLeftTop.y2d);
             x.lineTo(this.netLeftBot.x2d, this.netLeftBot.y2d);
-            x.lineTo(this.netLeftBot.x2d+netSides, this.netLeftBot.y2d);
-            x.lineTo(this.netLeftTop.x2d+netSides, this.netLeftTop.y2d);
+            x.lineTo(this.netLeftBot.x2d-netSides, this.netLeftBot.y2d);
+            x.lineTo(this.netLeftTop.x2d-netSides, this.netLeftTop.y2d);
             x.closePath();
             x.fillStyle = 'black';
             x.fill();
@@ -128,8 +128,8 @@ export class Board{
             x.beginPath();
             x.moveTo(this.netRightTop.x2d, this.netRightTop.y2d);
             x.lineTo(this.netRightBot.x2d, this.netRightBot.y2d);
-            x.lineTo(this.netRightBot.x2d-netSides, this.netRightBot.y2d);
-            x.lineTo(this.netRightTop.x2d-netSides, this.netRightTop.y2d);
+            x.lineTo(this.netRightBot.x2d+netSides, this.netRightBot.y2d);
+            x.lineTo(this.netRightTop.x2d+netSides, this.netRightTop.y2d);
             x.closePath();
             x.fillStyle = 'black';
             x.fill();
@@ -137,10 +137,10 @@ export class Board{
 
             //Net Inner Portion
             x.beginPath();
-            x.moveTo(this.netLeftTop.x2d+netSides, this.netRightTop.y2d+netTop);
-            x.lineTo(this.netLeftBot.x2d+netSides, this.netRightBot.y2d);
-            x.lineTo(this.netRightBot.x2d-netSides, this.netRightBot.y2d);
-            x.lineTo(this.netRightTop.x2d-netSides, this.netRightTop.y2d+netTop);
+            x.moveTo(this.netLeftTop.x2d-netSides, this.netRightTop.y2d+netTop);
+            x.lineTo(this.netLeftBot.x2d-netSides, this.netRightBot.y2d);
+            x.lineTo(this.netRightBot.x2d+netSides, this.netRightBot.y2d);
+            x.lineTo(this.netRightTop.x2d+netSides, this.netRightTop.y2d+netTop);
             x.closePath();
             x.fillStyle = ' rgba(0, 0, 0, 0.2)';
             x.fill();
