@@ -2,37 +2,38 @@ import { get2dCoordinate } from './utils.js';
 import { BOARD_COORDINATE, BOARD_STAND_WIDTH } from './constants/board.js';
 
 export class Board{
-    constructor(ctx){
+    constructor(ctx, gameMode){
         this.ctx = ctx;
+        this.gameMode = gameMode;
         //Board Edges
-        this.leftBot = get2dCoordinate( BOARD_COORDINATE.leftBot );
-        this.leftTop = get2dCoordinate( BOARD_COORDINATE.leftTop );
-        this.rightBot = get2dCoordinate( BOARD_COORDINATE.rightBot );
-        this.rightTop = get2dCoordinate( BOARD_COORDINATE.rightTop );
+        this.leftBot = get2dCoordinate( BOARD_COORDINATE[this.gameMode].leftBot );
+        this.leftTop = get2dCoordinate( BOARD_COORDINATE[this.gameMode].leftTop );
+        this.rightBot = get2dCoordinate( BOARD_COORDINATE[this.gameMode].rightBot );
+        this.rightTop = get2dCoordinate( BOARD_COORDINATE[this.gameMode].rightTop );
         
         //Board Inner Edges
-        this.innerLeftBot = get2dCoordinate( BOARD_COORDINATE.innerLeftBot );
-        this.innerLeftTop = get2dCoordinate( BOARD_COORDINATE.innerLeftTop );
-        this.innerRightBot = get2dCoordinate( BOARD_COORDINATE.innerRightBot );
-        this.innerRightTop = get2dCoordinate( BOARD_COORDINATE.innerRightTop );
-        this.innerMidLeftBot =  get2dCoordinate( BOARD_COORDINATE.innerMidLeftBot );
-        this.innerMidLeftTop = get2dCoordinate( BOARD_COORDINATE.innerMidLeftTop );
-        this.innerMidRightBot =  get2dCoordinate( BOARD_COORDINATE.innerMidRightBot );
-        this.innerMidRightTop = get2dCoordinate( BOARD_COORDINATE.innerMidRightTop );
+        this.innerLeftBot = get2dCoordinate( BOARD_COORDINATE[this.gameMode].innerLeftBot );
+        this.innerLeftTop = get2dCoordinate( BOARD_COORDINATE[this.gameMode].innerLeftTop );
+        this.innerRightBot = get2dCoordinate( BOARD_COORDINATE[this.gameMode].innerRightBot );
+        this.innerRightTop = get2dCoordinate( BOARD_COORDINATE[this.gameMode].innerRightTop );
+        this.innerMidLeftBot =  get2dCoordinate( BOARD_COORDINATE[this.gameMode].innerMidLeftBot );
+        this.innerMidLeftTop = get2dCoordinate( BOARD_COORDINATE[this.gameMode].innerMidLeftTop );
+        this.innerMidRightBot =  get2dCoordinate( BOARD_COORDINATE[this.gameMode].innerMidRightBot );
+        this.innerMidRightTop = get2dCoordinate( BOARD_COORDINATE[this.gameMode].innerMidRightTop );
         //Net Edges
-        this.netLeftBot = get2dCoordinate( BOARD_COORDINATE.netLeftBot );
-        this.netLeftTop = get2dCoordinate( BOARD_COORDINATE.netLeftTop );
-        this.netRightBot = get2dCoordinate( BOARD_COORDINATE.netRightBot );
-        this.netRightTop = get2dCoordinate( BOARD_COORDINATE.netRightTop );
+        this.netLeftBot = get2dCoordinate( BOARD_COORDINATE[this.gameMode].netLeftBot );
+        this.netLeftTop = get2dCoordinate( BOARD_COORDINATE[this.gameMode].netLeftTop );
+        this.netRightBot = get2dCoordinate( BOARD_COORDINATE[this.gameMode].netRightBot );
+        this.netRightTop = get2dCoordinate( BOARD_COORDINATE[this.gameMode].netRightTop );
         //Stand Positions
-        this.leftTopStandUpper = get2dCoordinate( BOARD_COORDINATE.leftTopStandUpper );
-        this.leftTopStandLower = get2dCoordinate( BOARD_COORDINATE.leftTopStandLower );
-        this.leftBotStandUpper =  get2dCoordinate( BOARD_COORDINATE.leftBotStandUpper );
-        this.leftBotStandLower =  get2dCoordinate( BOARD_COORDINATE.leftBotStandLower );
-        this.rightTopStandUpper = get2dCoordinate( BOARD_COORDINATE.rightTopStandUpper );
-        this.rightTopStandLower = get2dCoordinate( BOARD_COORDINATE.rightTopStandLower );
-        this.rightBotStandUpper = get2dCoordinate( BOARD_COORDINATE.rightBotStandUpper);
-        this.rightBotStandLower = get2dCoordinate( BOARD_COORDINATE.rightBotStandLower );
+        this.leftTopStandUpper = get2dCoordinate( BOARD_COORDINATE[this.gameMode].leftTopStandUpper );
+        this.leftTopStandLower = get2dCoordinate( BOARD_COORDINATE[this.gameMode].leftTopStandLower );
+        this.leftBotStandUpper =  get2dCoordinate( BOARD_COORDINATE[this.gameMode].leftBotStandUpper );
+        this.leftBotStandLower =  get2dCoordinate( BOARD_COORDINATE[this.gameMode].leftBotStandLower );
+        this.rightTopStandUpper = get2dCoordinate( BOARD_COORDINATE[this.gameMode].rightTopStandUpper );
+        this.rightTopStandLower = get2dCoordinate( BOARD_COORDINATE[this.gameMode].rightTopStandLower );
+        this.rightBotStandUpper = get2dCoordinate( BOARD_COORDINATE[this.gameMode].rightBotStandUpper);
+        this.rightBotStandLower = get2dCoordinate( BOARD_COORDINATE[this.gameMode].rightBotStandLower );
     }
 
     drawStand(upper,lower){

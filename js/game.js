@@ -17,15 +17,15 @@ export class Game{
         this.canvas.forEach((x)=>{
             this.ctx.push(x.getContext('2d'));
             x.height = CANVAS_HEIGHT;
-            x.width = CANVAS_WIDTH/(1+this.gameMode);
+            x.width = CANVAS_WIDTH;
         })
         this.gameOver = false;
         this.gameOverScore = gameAt;
         //First serve player
         this.servePlayer = 1;
     
-        this.board = new Board(this.ctx);
-        this.ball = new Ball(this.ctx, this.board, this.servePlayer);
+        this.board = new Board(this.ctx, this.gameMode);
+        this.ball = new Ball(this.ctx, this.board, this.gameMode, this.servePlayer);
         if(this.gameMode === 0){
             this.player1 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*3/4, 0, p1Name, 'mouse');
             this.botPlayer = new Bot(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD+BOARD.LENGTH, 1, p2Name, this.ball);

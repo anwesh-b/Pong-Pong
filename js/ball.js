@@ -10,12 +10,12 @@ import { ACCELERATION_DUE_TO_GRAVITY,
         } from './constants/constants.js';
 
 export class Ball{
-    constructor(ctx, board, firstServePlayer = 0){
+    constructor(ctx, board, gameMode, firstServePlayer = 0){
         this.ctx = ctx;
         this.board = board;
         this.position = { x:0, y:0, z:0};
         this.resetBallPosition(firstServePlayer);
-        
+        this.gameMode = gameMode;        
         this.dX = 0;
         this.dY = 0;
         this.dZ = 0;
@@ -78,10 +78,10 @@ export class Ball{
     }
 
     ballAboveBoard(){
-        if (this.position.x > BOARD_COORDINATE.leftBot.x && 
-            this.position.x < BOARD_COORDINATE.rightBot.x && 
-            this.position.z < BOARD_COORDINATE.leftBot.z && 
-            this.position.z > BOARD_COORDINATE.leftTop.z)
+        if (this.position.x > BOARD_COORDINATE[this.gameMode].leftBot.x && 
+            this.position.x < BOARD_COORDINATE[this.gameMode].rightBot.x && 
+            this.position.z < BOARD_COORDINATE[this.gameMode].leftBot.z && 
+            this.position.z > BOARD_COORDINATE[this.gameMode].leftTop.z)
         {
             return true;
         }
