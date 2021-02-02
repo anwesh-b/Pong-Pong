@@ -1,9 +1,11 @@
 import { Game } from "./game.js";
 import { GameLayout } from './constants/gamelayout.js';
+import { PLAYER_PROJECTOR } from "./constants/constants.js";
 
 export class TableTennis{
     constructor(ttContainer){
         ttContainer.innerHTML += GameLayout;
+        this.tempProjX = null;
         this.dashBoardContainer = document.querySelector('.dashboard-container');
         this.dashBoard = document.querySelector('.dashboard');
         this.settingButton = this.dashBoard.querySelector('#setting-icon');
@@ -42,6 +44,7 @@ export class TableTennis{
             x.addEventListener('click',()=>{
                 this.dashBoardContainer.style.display = 'none';
                 this.gameContainer.style.display = 'block';
+                this.tempProjX = PLAYER_PROJECTOR.viewerPosition.x;
                 this.game = new Game(this.gameContainer, index, this.gameAt, this.changeServeAt, this.playerName, "Henry");
                 this.checkGameOver();
             })
@@ -76,6 +79,7 @@ export class TableTennis{
     }
     
     postGame(winner){
+        PLAYER_PROJECTOR.viewerPosition.x = this.tempProjX;
         this.postGameContainer.style.display = 'block';
         this.gameContainer.style.display = 'none';
         this.postGameContainer.querySelector('span').innerHTML = winner;

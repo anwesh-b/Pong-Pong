@@ -10,8 +10,7 @@ export class Game{
     constructor(gameContainer, gameMode, gameAt, serveChangeAt, p1Name, p2Name){
         this.gameMode = gameMode;
         gameContainer.innerHTML = '<canvas></canvas>'.repeat(this.gameMode+1);
-        let playerP = PLAYER_PROJECTOR;
-        console.log(playerP.viewerPosition.x /= (1+this.gameMode));
+        PLAYER_PROJECTOR.viewerPosition.x /= (1+this.gameMode);
         this.canvas = gameContainer.querySelectorAll('canvas');
         this.ctx = [];
         this.canvas.forEach((x)=>{
