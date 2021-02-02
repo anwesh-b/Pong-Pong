@@ -4,7 +4,7 @@ import { Bot } from './players/bot.js';
 import { Human } from './players/human.js';
 import { Scoreboard } from './scoreboard.js';
 import { BOARD, DISTANCE_TO_BOARD } from './constants/board.js';
-import { CANVAS_HEIGHT, CANVAS_WIDTH, BALL_RESET_POS, SPEED_AFTER_BOUNCE } from './constants/constants.js';
+import { CANVAS_HEIGHT, CANVAS_WIDTH, FIRST_SERVE_PLAYER, SPEED_AFTER_BOUNCE } from './constants/constants.js';
 
 export class Game{
     constructor(gameContainer, gameMode, gameAt, serveChangeAt, p1Name, p2Name){
@@ -22,7 +22,7 @@ export class Game{
         this.gameOver = false;
         this.gameOverScore = gameAt;
         //First serve player
-        this.servePlayer = 1;
+        this.servePlayer = FIRST_SERVE_PLAYER;
     
         this.board = new Board(this.ctx, this.gameMode);
         this.ball = new Ball(this.ctx, this.board, this.gameMode, this.servePlayer);
@@ -39,6 +39,7 @@ export class Game{
             this.players[this.servePlayer].serveState = true;
         }   
         
+        this.ball.scoreTo = 1-this.servePlayer;
         
         this.isPaused = false;
         this.currentServe = 0;
@@ -79,7 +80,7 @@ export class Game{
         if(this.ball.scoreTo != undefined) this.players[this.ball.scoreTo].score++;
         if( this.checkWonOrNot(this.players[0]) ) {
             this.gameOver = true;
-            gameEnd(this.players[0].name);
+            this.gameEnd(this.players[0].name);
         } else if ( this.checkWonOrNot(this.players[1]) ){
             this.gameOver = true;
             this.gameEnd(this.players[1].name);

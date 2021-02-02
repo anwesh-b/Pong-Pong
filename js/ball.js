@@ -144,7 +144,7 @@ export class Ball{
     }
     
     isValidServeBounche(){
-        if ( this.position.z < this.lastPlayerTouched*BOARD.LENGTH/2 + DISTANCE_TO_BOARD || 
+        if ( this.position.z < this.lastPlayerTouched*BOARD.LENGTH/2 + DISTANCE_TO_BOARD && 
             this.position.z > (1 + this.lastPlayerTouched)*BOARD.LENGTH/2 + DISTANCE_TO_BOARD){
                 return true;
             }
@@ -152,7 +152,7 @@ export class Ball{
     }
 
     isValidBounche(){
-        if( this.position.z < (1-this.lastPlayerTouched) * BOARD.LENGTH/2 + DISTANCE_TO_BOARD ||
+        if( this.position.z < (1-this.lastPlayerTouched) * BOARD.LENGTH/2 + DISTANCE_TO_BOARD &&
             this.position.z > (2-this.lastPlayerTouched) * BOARD.LENGTH/2 + DISTANCE_TO_BOARD ){
                 return true;
             }

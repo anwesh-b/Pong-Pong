@@ -2,7 +2,7 @@
 import { BOARD, DISTANCE_TO_BOARD } from './board.js';
 
 export const CANVAS_HEIGHT = window.innerHeight; 
-export const CANVAS_WIDTH = window.innerWidth/2;
+export const CANVAS_WIDTH = window.innerWidth;
 
 export const PLAYER_PROJECTOR = {
     cameraPosition: {
@@ -23,6 +23,9 @@ export const PLAYER_PROJECTOR = {
     }
   };
 
+
+//Game
+export const FIRST_SERVE_PLAYER = 0;
 //Balls
 export const INITIAL_DX =0;
 export const INITIAL_DY = 0;
