@@ -9,16 +9,8 @@ import { CANVAS_HEIGHT, CANVAS_WIDTH, BALL_RESET_POS, SPEED_AFTER_BOUNCE } from 
 export class Game{
     constructor(gameContainer, gameMode, gameAt, serveChangeAt, p1Name, p2Name){
         this.gameMode = gameMode;
-        if(this.gameMode === 0){
-            gameContainer.innerHTML = `
-                <canvas></canvas>
-            `
-        }else if(this.gameMode === 1){
-            gameContainer.innerHTML = `
-                <canvas></canvas>
-                <canvas></canvas>
-            `        
-        }
+        gameContainer.innerHTML = '<canvas></canvas>'.repeat(this.gameMode+1);
+
         this.canvas = gameContainer.querySelectorAll('canvas');
         this.ctx = [];
         console.log(CANVAS_WIDTH)
