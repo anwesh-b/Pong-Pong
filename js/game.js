@@ -4,20 +4,20 @@ import { Bot } from './players/bot.js';
 import { Human } from './players/human.js';
 import { Scoreboard } from './scoreboard.js';
 import { BOARD, DISTANCE_TO_BOARD } from './constants/board.js';
-import { CANVAS_HEIGHT, CANVAS_WIDTH, FIRST_SERVE_PLAYER, SPEED_AFTER_BOUNCE } from './constants/constants.js';
+import { CANVAS_HEIGHT, CANVAS_WIDTH, FIRST_SERVE_PLAYER, SPEED_AFTER_BOUNCE, PLAYER_PROJECTOR } from './constants/constants.js';
 
 export class Game{
     constructor(gameContainer, gameMode, gameAt, serveChangeAt, p1Name, p2Name){
         this.gameMode = gameMode;
         gameContainer.innerHTML = '<canvas></canvas>'.repeat(this.gameMode+1);
-
+        let playerP = PLAYER_PROJECTOR;
+        console.log(playerP.viewerPosition.x /= (1+this.gameMode));
         this.canvas = gameContainer.querySelectorAll('canvas');
         this.ctx = [];
-        console.log(CANVAS_WIDTH)
         this.canvas.forEach((x)=>{
             this.ctx.push(x.getContext('2d'));
             x.height = CANVAS_HEIGHT;
-            x.width = CANVAS_WIDTH;
+            x.width = CANVAS_WIDTH/(1+this.gameMode);
         })
         this.gameOver = false;
         this.gameOverScore = gameAt;
@@ -27,14 +27,14 @@ export class Game{
         this.board = new Board(this.ctx, this.gameMode);
         this.ball = new Ball(this.ctx, this.board, this.gameMode, this.servePlayer);
         if(this.gameMode === 0){
-            this.player1 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*3/4, 0, p1Name, 'mouse');
+            this.player1 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*3/4, 0, p1Name, 'mouse',0);
             this.botPlayer = new Bot(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD+BOARD.LENGTH, 1, p2Name, this.ball);
             this.players = [this.player1, this.botPlayer];
             this.players[this.servePlayer].serveState = true;
             if ( this.botPlayer.playerId === this.servePlayer ) this.botPlayer.serve();
         }else if(this.gameMode === 1){
-            this.player1 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*3/4, 0, p1Name, 'mouse');
-            this.player2 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*4.5/5+BOARD.LENGTH, 1, p2Name, 'keyboard');
+            this.player1 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*3/4, 0, p1Name, 'mouse',1);
+            this.player2 = new Human(this.ctx, 10, BOARD.HEIGHT*0.75, DISTANCE_TO_BOARD*4.5/5+BOARD.LENGTH, 1, p2Name, 'keyboard',1);
             this.players = [this.player1, this.player2];
             this.players[this.servePlayer].serveState = true;
         }   
