@@ -1,8 +1,8 @@
 // Canvas constant
 import { BOARD, DISTANCE_TO_BOARD } from './board.js';
 
-export const CANVAS_HEIGHT = window.innerHeight; 
 export const CANVAS_WIDTH = window.innerWidth;
+export const CANVAS_HEIGHT = window.innerHeight; 
 
 export const PLAYER_PROJECTOR = {
     cameraPosition: {

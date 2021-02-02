@@ -7,7 +7,7 @@ import { BOARD, DISTANCE_TO_BOARD } from './constants/board.js';
 import { CANVAS_HEIGHT, CANVAS_WIDTH, FIRST_SERVE_PLAYER, SPEED_AFTER_BOUNCE, PLAYER_PROJECTOR } from './constants/constants.js';
 
 export class Game{
-    constructor(gameContainer, gameMode, gameAt, serveChangeAt, p1Name, p2Name){
+    constructor(gameContainer, gameMode, gameAt, serveChangeAt, maxGame, p1Name, p2Name){
         this.gameMode = gameMode;
         gameContainer.innerHTML = '<canvas></canvas>'.repeat(this.gameMode+1);
         PLAYER_PROJECTOR.viewerPosition.x /= (1+this.gameMode);
@@ -22,6 +22,7 @@ export class Game{
         this.gameOverScore = gameAt;
         //First serve player
         this.servePlayer = FIRST_SERVE_PLAYER;
+        this.maxGame = maxGame;
     
         this.board = new Board(this.ctx, this.gameMode);
         this.ball = new Ball(this.ctx, this.board, this.gameMode, this.servePlayer);
@@ -77,13 +78,7 @@ export class Game{
 
     resetToServe(){
         if(this.ball.scoreTo != undefined) this.players[this.ball.scoreTo].score++;
-        if( this.checkWonOrNot(this.players[0]) ) {
-            this.gameOver = true;
-            this.gameEnd(this.players[0].name);
-        } else if ( this.checkWonOrNot(this.players[1]) ){
-            this.gameOver = true;
-            this.gameEnd(this.players[1].name);
-        }  
+        if( this.checkWonOrNot(this.players[0]) ||  this.checkWonOrNot(this.players[1])) this.roundEnd();
         this.isPaused = true;
         this.ball.isInvalid = false;
         this.ball.isBeingServed = true;
@@ -111,6 +106,29 @@ export class Game{
     gameEnd(winner){
         this.winner = winner;
     }
+
+    roundEnd(){
+        if ( this.players[0].score > this.players[1].score ) this.players[0].games++;
+        else this.players[1].games++;
+        if ( this.players[0].games >= Math.round(this.maxGame/2) ){
+             this.gameEnd(this.players[0].name);
+             this.gameOver = true;
+        } else if ( this.players[1].games >= Math.round(this.maxGame/2) ) {
+            this.gameEnd(this.players[1].name);
+            this.gameOver = true;
+        }
+        this.currentServe = -1;
+        this.players.forEach(x=>{
+            x.score = 0;
+            x.serveState = false;
+            console.log(x.games);
+        })
+        this.players[FIRST_SERVE_PLAYER].serveState = true; 
+    }
+
+    // resetRound(){
+
+    // }
 
     checkWonOrNot(player){
         if (player.score >= this.gameOverScore) return true;

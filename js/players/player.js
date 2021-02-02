@@ -1,6 +1,6 @@
-import { BOARD, DISTANCE_TO_BOARD, BOARD_LENGTH } from '../constants/board.js';
 import { get2dCoordinate } from '../utils.js';
 import { BAT_HEIGHT, BAT_WIDTH } from '../constants/constants.js';
+import { BOARD, DISTANCE_TO_BOARD, BOARD_LENGTH } from '../constants/board.js';
 
 export class Player{
     constructor(ctx, x, y, z, id, name){
@@ -12,7 +12,8 @@ export class Player{
         this.batPosition = {x:x, y:y, z:z};
         // this.bat2dPosition = get2dCoordinate(this.batPosition);
         this.serveState = false;    
-        this.score = 0;    
+        this.score = 0;   
+        this.games = 0; 
     }
     drawBat(index){
         let bat2dPosition = 0;

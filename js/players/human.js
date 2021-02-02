@@ -1,6 +1,6 @@
 import { Player } from "./player.js";
-import { BAT_HEIGHT, CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants/constants.js';
 import { BOARD, BOARD_LENGTH, DISTANCE_TO_BOARD } from '../constants/board.js';
+import { BAT_HEIGHT, CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants/constants.js';
 
 export class Human extends Player{
     constructor(ctx, x, y, z, id, name, movement, gameMode){
@@ -18,7 +18,6 @@ export class Human extends Player{
         document.querySelector('canvas').addEventListener('mousemove',(x)=>{
             //Traslating x and y coordinate on the basis of mouse movement;
             this.batPosition.x = x.x - CANVAS_WIDTH/(2+(this.gameMode*2));
-            console.log(this.batPosition.x);
             this.batPosition.y = (CANVAS_HEIGHT/2 + x.y) * BOARD.HEIGHT / CANVAS_HEIGHT - BOARD.HEIGHT/3 ;   
             //Limit z movement to half of board length
             // if (this.batPosition.z > DISTANCE_TO_BOARD + BOARD_LENGTH/2) this.batPosition.z = DISTANCE_TO_BOARD + BOARD_LENGTH/2;          
