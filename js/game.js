@@ -21,10 +21,11 @@ export class Game{
         }
         this.canvas = gameContainer.querySelectorAll('canvas');
         this.ctx = [];
+        console.log(CANVAS_WIDTH)
         this.canvas.forEach((x)=>{
             this.ctx.push(x.getContext('2d'));
             x.height = CANVAS_HEIGHT;
-            x.width = CANVAS_WIDTH;
+            x.width = CANVAS_WIDTH/(1+this.gameMode);
         })
         this.gameOver = false;
         this.gameOverScore = gameAt;
@@ -84,11 +85,13 @@ export class Game{
 
     resetToServe(){
         if(this.ball.scoreTo != undefined) this.players[this.ball.scoreTo].score++;
-        if( this.checkWonOrNot(this.players[0]) || this.checkWonOrNot(this.players[1]) ) {
+        if( this.checkWonOrNot(this.players[0]) ) {
             this.gameOver = true;
-            if (this.players[0].score> this.players[1].score) gameEnd(this.players[0].name);
-            else this.gameEnd(this.players[1].name);
-        }   
+            gameEnd(this.players[0].name);
+        } else if ( this.checkWonOrNot(this.players[1]) ){
+            this.gameOver = true;
+            this.gameEnd(this.players[1].name);
+        }  
         this.isPaused = true;
         this.ball.isInvalid = false;
         this.ball.isBeingServed = true;
@@ -109,6 +112,7 @@ export class Game{
             this.ball.resetBallPosition(this.servePlayer);
             this.isPaused = false;
         }
+        this.ball.scoreTo = this.players[1-this.servePlayer].playerId;
         this.isPaused = true;
     }
 
