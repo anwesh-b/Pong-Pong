@@ -121,14 +121,10 @@ export class Game{
         this.players.forEach(x=>{
             x.score = 0;
             x.serveState = false;
-            console.log(x.games);
         })
-        this.players[FIRST_SERVE_PLAYER].serveState = true; 
+        this.servePlayer = (FIRST_SERVE_PLAYER + this.players[0].games + this.players[1].games )%2;
     }
 
-    // resetRound(){
-
-    // }
 
     checkWonOrNot(player){
         if (player.score >= this.gameOverScore) return true;
