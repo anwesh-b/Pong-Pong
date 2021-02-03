@@ -47,6 +47,9 @@ export class Game{
         this.scoreBoard = new Scoreboard( this.ctx, this.players[0], this.players[1] );
         this.runGame();
         this.winner = null;
+
+        this.refree = new Audio();
+        this.refree.src = './assets/refree.m4a';
     }
 
     runGame(){
@@ -77,6 +80,7 @@ export class Game{
     }
 
     resetToServe(){
+        this.refree.play();
         if(this.ball.scoreTo != undefined) this.players[this.ball.scoreTo].score++;
         if( this.checkWonOrNot(this.players[0]) ||  this.checkWonOrNot(this.players[1])) this.roundEnd();
         this.isPaused = true;

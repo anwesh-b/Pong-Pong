@@ -26,6 +26,8 @@ export class Ball{
         // this.position2d = get2dCoordinate(this.position);
         this.bounches = 0;
         this.scoreTo = null;
+        this.sound = new Audio('./assets/bounche.m4a');
+        this.sound.load();
     }
 
     drawBall(){
@@ -92,6 +94,7 @@ export class Ball{
         if (!this.isBeingServed) this.dY += ACCELERATION_DUE_TO_GRAVITY;
         if (this.ballAboveBoard() && this.detectCollision(BOARD.HEIGHT)) {
             this.bounches++;
+            this.sound.play();
             this.dY = this.speedAfterBounche;
             // Check if the position touched is valid or not 
             if( this.bounches <= 1 && this.isValidServeBounche()){         
@@ -116,6 +119,7 @@ export class Ball{
             this.position.z += BOARD.BALL_RADIUS;
             this.speedAfterBounche *=0.2;
             this.isInvalid = true;
+            this.sound.play();
         }
     }
 

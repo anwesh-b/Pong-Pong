@@ -9,6 +9,8 @@ export class Player{
         this.name = name;
         this.bat = new Image();
         this.bat.src = './assets/bat.png';
+        this.audio = new Audio();
+        this.audio.src = './assets/bat.m4a';
         this.batPosition = {x:x, y:y, z:z};
         // this.bat2dPosition = get2dCoordinate(this.batPosition);
         this.serveState = false;    
@@ -48,6 +50,7 @@ export class Player{
             ball.position.y - BOARD.BALL_RADIUS < this.batPosition.y + BAT_HEIGHT/2 &&
             ball.position.z + BOARD.BALL_RADIUS > this.batPosition.z &&
             ball.position.z - BOARD.BALL_RADIUS< this.batPosition.z){
+                this.audio.play();
                 ball.dZ *= -1;
                 ball.dX += Math.sin((ball.position.x - this.batPosition.x) * Math.PI / (BAT_WIDTH * 2))
                 ball.dY = -2;
