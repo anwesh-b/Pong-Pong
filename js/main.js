@@ -21,6 +21,7 @@ export class TableTennis{
 
         this.game = null;
         this.playerName = localStorage.getItem('playerName') || 'Player 1';
+        this.player2Name = localStorage.getItem('player2Name') || 'Player 2';
         this.gameAt = localStorage.getItem('gameAt') || '11';
         this.changeServeAt = localStorage.getItem('changeServeAt') || '2';
         this.maxGame = localStorage.getItem('maxGame') || '1';
@@ -47,7 +48,8 @@ export class TableTennis{
                 this.gameContainer.style.display = 'block';
                 this.quitGame.style.display = 'block';
                 this.tempProjX = PLAYER_PROJECTOR.viewerPosition.x;
-                this.game = new Game(this.gameContainer, index, this.gameAt, this.changeServeAt, this.maxGame, this.playerName, "Henry");
+                if (index === 0) this.game = new Game(this.gameContainer, index, this.gameAt, this.changeServeAt, this.maxGame, this.playerName, "Henry");
+                else if (index === 1) this.game = new Game(this.gameContainer, index, this.gameAt, this.changeServeAt, this.maxGame, this.playerName, this.player2Name);
                 this.checkGameOver();
             })
         })
@@ -105,7 +107,10 @@ export class TableTennis{
             case 0:         //Player Name
                 x.querySelector('input').value = this.playerName;
                 break;
-            case 1:      //Best Of
+            case 1:         //Player Name
+                x.querySelector('input').value = this.player2Name;
+                break;
+            case 2:      //Best Of
                 x.querySelectorAll('input').forEach((y)=>{
                     if(y.value === this.maxGame) {
                         y.checked = "checked";
@@ -113,7 +118,7 @@ export class TableTennis{
                     }
                 })
                 break;
-            case 2:         //Game At
+            case 3:         //Game At
                 x.querySelectorAll('input').forEach((x)=>{
                     if (x.value === this.gameAt){
                         x.checked = "checked";
@@ -121,7 +126,7 @@ export class TableTennis{
                     } 
                 })
                 break;
-            case 3:         //Change Serve At
+            case 4:         //Change Serve At
                 x.querySelectorAll('input').forEach((x)=>{
                     if (x.value === this.changeServeAt){
                         x.checked="checked";
@@ -129,8 +134,8 @@ export class TableTennis{
                     } 
                 })  
                 break;
-            case 4:         //Stadium
-                break;
+            // case 4:         //Stadium
+            //     break;
             default:
                 break;
         }
@@ -138,13 +143,19 @@ export class TableTennis{
     
     setSettings(x,index){
         switch(index){
-            case 0:         //Player Name
+            case 0:         //Player1 Name
                 if(x.querySelector('input').value){
                     this.playerName = x.querySelector('input').value;
                     localStorage.setItem('playerName', this.playerName);
                 }
                 break;
-            case 1:      //Best Of
+            case 1:         //Player2 Name
+                if(x.querySelector('input').value){
+                    this.player2Name = x.querySelector('input').value;
+                    localStorage.setItem('player2Name', this.playerName);
+                }
+                break;
+            case 2:      //Best Of
                 x.querySelectorAll('input').forEach((y)=>{
                     if(y.checked) {
                         this.maxGame = y.value;
@@ -153,7 +164,7 @@ export class TableTennis{
                     }
                 })
                 break;
-            case 2:         //Game At
+            case 3:         //Game At
                 let temp2 = x.querySelectorAll('input');
                 temp2.forEach((y)=>{
                     if(y.checked) {
@@ -163,7 +174,7 @@ export class TableTennis{
                     }
                 })
                 break;
-            case 3:         //Change Serve At
+            case 4:         //Change Serve At
                 let temp3 = x.querySelectorAll('input');
                 temp3.forEach((y)=>{
                     if(y.checked){
@@ -173,8 +184,8 @@ export class TableTennis{
                     }
                 })
                 break;
-            case 4:         //Stadium
-                break;
+            // case 4:         //Stadium
+            //     break;
             default:
                 break;
         }

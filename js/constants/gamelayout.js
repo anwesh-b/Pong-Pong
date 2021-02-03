@@ -24,8 +24,12 @@ export const GameLayout = `
             </div>
             <table>
                 <tr>
-                <td>Player Name</td>
+                <td>Player1 Name</td>
                 <td><input placeholder="Player 1"></td>
+                </tr>
+                <tr>
+                <td>Player2 Name</td>
+                <td><input placeholder="Player 2"></td>
                 </tr>
                 <tr>
                     <td> Best Of  (in progress) </td>
@@ -57,10 +61,6 @@ export const GameLayout = `
                         <input type="radio" value="5" id="fiveServe" name="serveChangeAt">
                         <label for="fiveServe">5</label>
                     </td>
-                </tr>
-                <tr>
-                    <td>Stadium  (in progress)</td>
-                    <td></td>
                 </tr>
             </table>
             <button>Save</button>
