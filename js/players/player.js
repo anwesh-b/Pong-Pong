@@ -53,7 +53,7 @@ export class Player{
                 this.audio.play();
                 ball.dZ *= -1;
                 ball.dX += Math.sin((ball.position.x - this.batPosition.x) * Math.PI / (BAT_WIDTH * 2))
-                ball.dY = -2;
+                ball.dY = -2.5;
                 if (ball.dZ >0 ) ball.dZ = 8;
                 else ball.dZ = -8;
                 if( this.serveState) {

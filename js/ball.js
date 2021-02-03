@@ -93,6 +93,7 @@ export class Ball{
     moveBall(){
         if (!this.isBeingServed) this.dY += ACCELERATION_DUE_TO_GRAVITY;
         if (this.ballAboveBoard() && this.detectCollision(BOARD.HEIGHT)) {
+            // debugger;
             this.bounches++;
             this.sound.play();
             this.dY = this.speedAfterBounche;
@@ -114,6 +115,7 @@ export class Ball{
             this.isInvalid = true;
         }
         if (this.detectNetCollision()){
+            debugger;
             this.dZ *= -0.2;
             this.dX *= 0.2;
             this.position.z += BOARD.BALL_RADIUS;
@@ -127,8 +129,8 @@ export class Ball{
         if(
             this.position.y + BOARD.BALL_RADIUS > BOARD.HEIGHT - BOARD.NET_HEIGHT &&
             this.position.y < BOARD.HEIGHT && 
-            this.position.z + BOARD.BALL_RADIUS >= BOARD.LENGTH/2 &&
-            this.position.z - BOARD.BALL_RADIUS <=  BOARD.LENGTH/2 &&
+            this.position.z + BOARD.BALL_RADIUS >= BOARD.LENGTH/2 + DISTANCE_TO_BOARD &&
+            this.position.z - BOARD.BALL_RADIUS <=  BOARD.LENGTH/2 + DISTANCE_TO_BOARD &&
             Math.abs(this.position.x) <= BOARD.WIDTH/2
         ){
             return true;
