@@ -97,7 +97,6 @@ body{
 #back-settings button:hover{
     border: none;
     border: solid 2px rgba(0,0,0,0.1);
-    /* padding: 6px 10px; */
     background-color: rgba(0,0,0,0.5);
     transition: 0.3s;
 }
@@ -168,6 +167,22 @@ body{
 .postGameContainer #play-again img{
     height: 20px;
     width: 20px;
+}
+
+.quit-game{
+    width: 60px;
+    padding: 5px 10px;
+    position: absolute;
+    display: none;
+    margin-top: 1%;
+    margin-left: 2%;
+    background-color: rgb(170, 170, 170);
+    border-radius: 5px;
+}
+
+.quit-game:hover{
+    background-color:  rgb(199, 199, 199);
+    cursor: pointer;
 }
 
 canvas{

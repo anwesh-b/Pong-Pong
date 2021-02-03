@@ -67,7 +67,9 @@ export const GameLayout = `
         </div>
     </div>    
 </div>
-<div id="ping-pong-container"></div>
+<button class="quit-game">QUIT</button>
+<div id="ping-pong-container">
+</div>
 <div class="postGameContainer">
     <span></span> Won!!!!! <br><br>
     <div id="play-again">

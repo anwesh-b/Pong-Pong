@@ -16,6 +16,7 @@ export class TableTennis{
         this.backButton = document.querySelector('#back-settings');
         this.postGameContainer = document.querySelector('.postGameContainer');
         this.gameContainer = document.getElementById('ping-pong-container');
+        this.quitGame = document.querySelector('.quit-game');
         this.replay = this.postGameContainer.querySelector('#play-again');
 
         this.game = null;
@@ -44,6 +45,7 @@ export class TableTennis{
             x.addEventListener('click',()=>{
                 this.dashBoardContainer.style.display = 'none';
                 this.gameContainer.style.display = 'block';
+                this.quitGame.style.display = 'block';
                 this.tempProjX = PLAYER_PROJECTOR.viewerPosition.x;
                 this.game = new Game(this.gameContainer, index, this.gameAt, this.changeServeAt, this.maxGame, this.playerName, "Henry");
                 this.checkGameOver();
@@ -65,10 +67,22 @@ export class TableTennis{
             this.dashBoardContainer.style.display = 'block';
             this.dashBoard.style.display ='block';
         })
+
+        this.quitGame.addEventListener('click',()=>{
+            PLAYER_PROJECTOR.viewerPosition.x = this.tempProjX;
+            this.game.gameOver = true;
+            delete this.game;
+            // this.game = null;
+            this.dashBoardContainer.style.display = 'block';
+            this.quitGame.style.display = 'none';
+            this.gameContainer.style.display = 'none';
+            this.postGameContainer.style.display = 'none';
+        })
     }
     
     
     checkGameOver(){
+        if(!this.game) return;
         if(this.game.gameOver){
             this.postGame(this.game.winner);
             delete this.game;
@@ -81,6 +95,7 @@ export class TableTennis{
     postGame(winner){
         PLAYER_PROJECTOR.viewerPosition.x = this.tempProjX;
         this.postGameContainer.style.display = 'block';
+        this.quitGame.style.display = 'none';
         this.gameContainer.style.display = 'none';
         this.postGameContainer.querySelector('span').innerHTML = winner;
     }
