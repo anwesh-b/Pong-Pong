@@ -1,13 +1,7 @@
 import { get2dCoordinate } from './utils.js';
 import { BALL_RESET_POS } from './constants/constants.js';
+import { ACCELERATION_DUE_TO_GRAVITY, SPEED_AFTER_BOUNCE} from './constants/constants.js';
 import { DISTANCE_TO_BOARD, BOARD, BOARD_COORDINATE, BOARD_LENGTH } from './constants/board.js';
-import { ACCELERATION_DUE_TO_GRAVITY, 
-            SPEED_AFTER_BOUNCE, 
-            INITIAL_DX, 
-            INITIAL_DY, 
-            INITIAL_DZ, 
-            MAX_BALL_Z_DISTANCE 
-        } from './constants/constants.js';
 
 export class Ball{
     constructor(ctx, board, gameMode, firstServePlayer = 0){
@@ -116,7 +110,6 @@ export class Ball{
             this.isInvalid = true;
         }
         if (this.detectNetCollision()){
-            debugger;
             this.dZ *= -0.2;
             this.dX *= 0.2;
             this.position.z += BOARD.BALL_RADIUS;

@@ -1,4 +1,4 @@
-import { PLAYER_PROJECTOR, BAT_Y } from './constants/constants.js';
+import { PLAYER_PROJECTOR } from './constants/constants.js';
 
 export function get2dCoordinate (position) {
   let cx = Math.cos(PLAYER_PROJECTOR.cameraOrientation.x);

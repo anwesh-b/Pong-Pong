@@ -1,5 +1,5 @@
 import { Player } from "./player.js";
-import { BOARD, BOARD_LENGTH, DISTANCE_TO_BOARD } from '../constants/board.js';
+import { BOARD } from '../constants/board.js';
 import { BAT_HEIGHT, CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants/constants.js';
 
 export class Human extends Player{

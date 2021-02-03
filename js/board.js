@@ -128,10 +128,10 @@ export class Board{
 
             //Net Left Stand
             x.beginPath();
-            x.moveTo(this.netLeftBot.x2d, this.netLeftBot.y2d+3);
-            x.lineTo(this.netLeftBot.x2d, this.netLeftBot.y2d-3);
-            x.lineTo(this.netLeftBot.x2d+24, this.netLeftBot.y2d-3);
-            x.lineTo(this.netLeftBot.x2d+18, this.netLeftBot.y2d+3);
+            x.moveTo(this.netLeftBot.x2d, this.netLeftBot.y2d+2);
+            x.lineTo(this.netLeftBot.x2d, this.netLeftBot.y2d-2);
+            x.lineTo(this.netLeftBot.x2d+23, this.netLeftBot.y2d-2);
+            x.lineTo(this.netLeftBot.x2d+19, this.netLeftBot.y2d+2);
             x.closePath();
             x.fillStyle = 'black';
             x.fill();
@@ -150,10 +150,10 @@ export class Board{
 
             //Net Right Stand
             x.beginPath();
-            x.moveTo(this.netRightBot.x2d, this.netRightBot.y2d-3);
-            x.lineTo(this.netRightBot.x2d, this.netRightBot.y2d+3);
-            x.lineTo(this.netRightBot.x2d-18, this.netRightBot.y2d+3);
-            x.lineTo(this.netRightBot.x2d-24, this.netRightBot.y2d-3);
+            x.moveTo(this.netRightBot.x2d, this.netRightBot.y2d-2);
+            x.lineTo(this.netRightBot.x2d, this.netRightBot.y2d+2);
+            x.lineTo(this.netRightBot.x2d-19, this.netRightBot.y2d+2);
+            x.lineTo(this.netRightBot.x2d-23, this.netRightBot.y2d-2);
             x.closePath();
             x.fillStyle = 'black';
             x.fill();

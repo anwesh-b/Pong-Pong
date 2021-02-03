@@ -25,15 +25,6 @@ export class Scoreboard{
             x.fillText(this.player1.games, this.left, this.top +15 - index*95 );
             x.font = "16px Comic Sans MS";
             x.fillText(this.player1.name, this.left, this.top+50 - index*150);                
-        });
-        // this.ctx.beginPath();
-        // this.ctx.moveTo( this.left+30, this.top);
-        // this.ctx.lineTo( this.left+this.width+30, this.top);
-        // this.ctx.lineTo( this.left+this.width, this.top+this.height);
-        // this.ctx.lineTo( this.left, this.top+this.height);
-        // this.ctx.closePath();
-        // this.ctx.fillStyle= 'red';
-        // this.ctx.fill();
-        // this.ctx.stroke();        
+        });      
     }
 }

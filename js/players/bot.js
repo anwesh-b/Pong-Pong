@@ -1,6 +1,6 @@
 import { Player } from "./player.js";
-import { BOARD, BOARD_LENGTH, DISTANCE_TO_BOARD } from '../constants/board.js';
 import { CHECK_BALL_TIMER } from '../constants/constants.js';
+import { BOARD, BOARD_LENGTH, DISTANCE_TO_BOARD } from '../constants/board.js';
 
 export class Bot extends Player{
     constructor(ctx, x, y, z, id, name, ball){

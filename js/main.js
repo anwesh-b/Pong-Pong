@@ -134,8 +134,6 @@ export class TableTennis{
                     } 
                 })  
                 break;
-            // case 4:         //Stadium
-            //     break;
             default:
                 break;
         }
@@ -184,8 +182,6 @@ export class TableTennis{
                     }
                 })
                 break;
-            // case 4:         //Stadium
-            //     break;
             default:
                 break;
         }

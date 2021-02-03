@@ -12,7 +12,6 @@ export class Player{
         this.audio = new Audio();
         this.audio.src = './assets/bat.m4a';
         this.batPosition = {x:x, y:y, z:z};
-        // this.bat2dPosition = get2dCoordinate(this.batPosition);
         this.serveState = false;    
         this.score = 0;   
         this.games = 0; 
