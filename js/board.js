@@ -126,12 +126,34 @@ export class Board{
             x.fill();
             x.stroke();
 
+            //Net Left Stand
+            x.beginPath();
+            x.moveTo(this.netLeftBot.x2d, this.netLeftBot.y2d+3);
+            x.lineTo(this.netLeftBot.x2d, this.netLeftBot.y2d-3);
+            x.lineTo(this.netLeftBot.x2d+24, this.netLeftBot.y2d-3);
+            x.lineTo(this.netLeftBot.x2d+18, this.netLeftBot.y2d+3);
+            x.closePath();
+            x.fillStyle = 'black';
+            x.fill();
+            x.stroke();
+
             //Net Right Side
             x.beginPath();
             x.moveTo(this.netRightTop.x2d, this.netRightTop.y2d);
             x.lineTo(this.netRightBot.x2d, this.netRightBot.y2d);
             x.lineTo(this.netRightBot.x2d+this.netSides, this.netRightBot.y2d);
             x.lineTo(this.netRightTop.x2d+this.netSides, this.netRightTop.y2d);
+            x.closePath();
+            x.fillStyle = 'black';
+            x.fill();
+            x.stroke();
+
+            //Net Right Stand
+            x.beginPath();
+            x.moveTo(this.netRightBot.x2d, this.netRightBot.y2d-3);
+            x.lineTo(this.netRightBot.x2d, this.netRightBot.y2d+3);
+            x.lineTo(this.netRightBot.x2d-18, this.netRightBot.y2d+3);
+            x.lineTo(this.netRightBot.x2d-24, this.netRightBot.y2d-3);
             x.closePath();
             x.fillStyle = 'black';
             x.fill();
