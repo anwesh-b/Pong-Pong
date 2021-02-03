@@ -50,6 +50,7 @@ export class Game{
 
         this.refree = new Audio();
         this.refree.src = './assets/refree.m4a';
+        this.refree.volume = 0.7;
     }
 
     runGame(){

@@ -27,7 +27,7 @@ export class Ball{
         this.bounches = 0;
         this.scoreTo = null;
         this.sound = new Audio('./assets/bounche.m4a');
-        this.sound.load();
+        this.sound.volume = 0.5;
     }
 
     drawBall(){
