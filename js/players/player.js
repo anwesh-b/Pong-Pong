@@ -51,6 +51,7 @@ export class Player{
             ball.position.z + BOARD.BALL_RADIUS > this.batPosition.z &&
             ball.position.z - BOARD.BALL_RADIUS< this.batPosition.z){
                 this.audio.play();
+                if(!ball.isBounched) ball.isInvalid = true;
                 ball.dZ *= -1;
                 ball.dX += Math.sin((ball.position.x - this.batPosition.x) * Math.PI / (BAT_WIDTH * 2))
                 ball.dY = -2.5;
@@ -64,6 +65,7 @@ export class Player{
                 }
                 ball.lastPlayerTouched = this.playerId;
                 ball.isBeingServed = false;
+                ball.isBounched = false;
             }
     }
 }

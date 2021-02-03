@@ -5,6 +5,9 @@ export class Board{
     constructor(ctx, gameMode){
         this.ctx = ctx;
         this.gameMode = gameMode;
+        this.netTop = 3;
+        this.netSides = 3;
+        this.netBotRadius = 10;    
         //Board Edges
         this.leftBot = get2dCoordinate( BOARD_COORDINATE[this.gameMode].leftBot );
         this.leftTop = get2dCoordinate( BOARD_COORDINATE[this.gameMode].leftTop );
@@ -100,15 +103,13 @@ export class Board{
 
     drawNet(){
         this.ctx.forEach((x) => {
-            let netTop = 3;
-            let netSides = 3;
             //Net Top
             x.beginPath();
-            x.moveTo(this.netLeftTop.x2d-netSides, this.netLeftTop.y2d);
-            x.lineTo(this.netRightTop.x2d+netSides, this.netRightTop.y2d);
-            x.lineTo(this.netRightTop.x2d+netSides, this.netRightTop.y2d+netTop);
-            x.lineTo(this.netLeftTop.x2d-netSides, this.netLeftTop.y2d+netTop);
-            x.lineTo(this.netLeftTop.x2d-netSides, this.netLeftTop.y2d);
+            x.moveTo(this.netLeftTop.x2d-this.netSides, this.netLeftTop.y2d);
+            x.lineTo(this.netRightTop.x2d+this.netSides, this.netRightTop.y2d);
+            x.lineTo(this.netRightTop.x2d+this.netSides, this.netRightTop.y2d+this.netTop);
+            x.lineTo(this.netLeftTop.x2d-this.netSides, this.netLeftTop.y2d+this.netTop);
+            x.lineTo(this.netLeftTop.x2d-this.netSides, this.netLeftTop.y2d);
             x.fillStyle = 'white';
             x.fill();
             // x.strokeStyle = 'red';
@@ -118,8 +119,8 @@ export class Board{
             x.beginPath();
             x.moveTo(this.netLeftTop.x2d, this.netLeftTop.y2d);
             x.lineTo(this.netLeftBot.x2d, this.netLeftBot.y2d);
-            x.lineTo(this.netLeftBot.x2d-netSides, this.netLeftBot.y2d);
-            x.lineTo(this.netLeftTop.x2d-netSides, this.netLeftTop.y2d);
+            x.lineTo(this.netLeftBot.x2d-this.netSides, this.netLeftBot.y2d);
+            x.lineTo(this.netLeftTop.x2d-this.netSides, this.netLeftTop.y2d);
             x.closePath();
             x.fillStyle = 'black';
             x.fill();
@@ -129,8 +130,8 @@ export class Board{
             x.beginPath();
             x.moveTo(this.netRightTop.x2d, this.netRightTop.y2d);
             x.lineTo(this.netRightBot.x2d, this.netRightBot.y2d);
-            x.lineTo(this.netRightBot.x2d+netSides, this.netRightBot.y2d);
-            x.lineTo(this.netRightTop.x2d+netSides, this.netRightTop.y2d);
+            x.lineTo(this.netRightBot.x2d+this.netSides, this.netRightBot.y2d);
+            x.lineTo(this.netRightTop.x2d+this.netSides, this.netRightTop.y2d);
             x.closePath();
             x.fillStyle = 'black';
             x.fill();
@@ -138,18 +139,29 @@ export class Board{
 
             //Net Inner Portion
             x.beginPath();
-            x.moveTo(this.netLeftTop.x2d-netSides, this.netRightTop.y2d+netTop);
-            x.lineTo(this.netLeftBot.x2d-netSides, this.netRightBot.y2d);
-            x.lineTo(this.netRightBot.x2d+netSides, this.netRightBot.y2d);
-            x.lineTo(this.netRightTop.x2d+netSides, this.netRightTop.y2d+netTop);
+            x.moveTo(this.netLeftTop.x2d-this.netSides, this.netRightTop.y2d+this.netTop);
+            x.lineTo(this.netLeftBot.x2d-this.netSides, this.netRightBot.y2d);
+            x.lineTo(this.netRightBot.x2d+this.netSides, this.netRightBot.y2d);
+            x.lineTo(this.netRightTop.x2d+this.netSides, this.netRightTop.y2d+this.netTop);
             x.closePath();
             x.fillStyle = ' rgba(0, 0, 0, 0.2)';
             x.fill();
         });
     }
 
+    drawNetLower(){
+        this.ctx.forEach((x)=>{
+            x.beginPath();
+            x.arc(this.netLeftBot.x2d + this.netBotRadius - this.netSides, this.netLeftBot.y2d, this.netBotRadius, 0, Math.PI);
+            x.arc(this.netRightBot.x2d - this.netBotRadius + this.netSides, this.netRightBot.y2d, this.netBotRadius, 0, Math.PI);
+            x.fillStyle = 'black';
+            x.fill();
+        })
+    }
+
     drawBoard(){
         this.drawStands();
+        this.drawNetLower();
         this.drawMainBoard();
         this.drawBlueBoard();
         this.drawNet();

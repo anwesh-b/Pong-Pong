@@ -25,6 +25,7 @@ export class Ball{
         this.speedAfterBounche = SPEED_AFTER_BOUNCE;
         // this.position2d = get2dCoordinate(this.position);
         this.bounches = 0;
+        this.isBounched = true;
         this.scoreTo = null;
         this.sound = new Audio('./assets/bounche.m4a');
         this.sound.volume = 0.5;
@@ -93,7 +94,7 @@ export class Ball{
     moveBall(){
         if (!this.isBeingServed) this.dY += ACCELERATION_DUE_TO_GRAVITY;
         if (this.ballAboveBoard() && this.detectCollision(BOARD.HEIGHT)) {
-            // debugger;
+            this.isBounched = true;
             this.bounches++;
             this.sound.play();
             this.dY = this.speedAfterBounche;
