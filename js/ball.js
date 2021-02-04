@@ -82,6 +82,11 @@ export class Ball{
         });
     }
 
+    /**
+     * Checks if ball is above the board or not
+     *
+     * @return {Boolean} 
+    */
     ballAboveBoard(){
         if (this.position.x > BOARD_COORDINATE[this.gameMode].leftBot.x && 
             this.position.x < BOARD_COORDINATE[this.gameMode].rightBot.x && 
@@ -127,6 +132,11 @@ export class Ball{
         }
     }
 
+    /**
+     * Checks if ball collided with Net
+     *
+     * @return {Boolean} 
+    */
     detectNetCollision(){
         if(
             this.position.y + BOARD.BALL_RADIUS > BOARD.HEIGHT - BOARD.NET_HEIGHT &&
@@ -140,17 +150,28 @@ export class Ball{
         return false;
     }
 
+    /**
+     * Checks if ball is collided in y axis
+     *
+     * @param Number The y axis to check collision with 
+     * @return {Boolean} 
+    */
     detectCollision(height){
         if (this.position.y + BOARD.BALL_RADIUS >= height ) return true;
         else return false;
     }
 
+    /** Resets the ball position
+     * 
+     * @param {Number} id Player Id 
+     */
     resetBallPosition(id){
         this.position.x = BALL_RESET_POS[id].x
         this.position.y = BALL_RESET_POS[id].y
         this.position.z = BALL_RESET_POS[id].z
     }
     
+    //Check if position where ball bounched is valid during serve
     isValidServeBounche(){
         if ( this.position.z < this.lastPlayerTouched*BOARD.LENGTH/2 + DISTANCE_TO_BOARD && 
             this.position.z > (1 + this.lastPlayerTouched)*BOARD.LENGTH/2 + DISTANCE_TO_BOARD){
@@ -159,6 +180,7 @@ export class Ball{
         else return false;
     }
 
+    //Check if position where ball bounched is valid
     isValidBounche(){
         if( this.position.z < (1-this.lastPlayerTouched) * BOARD.LENGTH/2 + DISTANCE_TO_BOARD &&
             this.position.z > (2-this.lastPlayerTouched) * BOARD.LENGTH/2 + DISTANCE_TO_BOARD ){
