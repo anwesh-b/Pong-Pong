@@ -154,7 +154,7 @@ export class TableTennis{
             case 1:         //Player2 Name
                 if(x.querySelector('input').value){
                     this.player2Name = x.querySelector('input').value;
-                    localStorage.setItem('player2Name', this.playerName);
+                    localStorage.setItem('player2Name', this.player2Name);
                 }
                 break;
             case 2:      //Best Of
