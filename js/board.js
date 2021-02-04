@@ -2,6 +2,11 @@ import { get2dCoordinate } from './utils.js';
 import { BOARD_COORDINATE, BOARD_STAND_WIDTH } from './constants/board.js';
 
 export class Board{
+    /**
+     * @constructs Board
+     * @param Array  Array of Canvas Context
+     * @param Number GameMode ie. vs Bot or vs Friend
+     */
     constructor(ctx, gameMode){
         this.ctx = ctx;
         this.gameMode = gameMode;

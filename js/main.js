@@ -3,6 +3,10 @@ import { GameLayout } from './constants/gamelayout.js';
 import { PLAYER_PROJECTOR } from "./constants/constants.js";
 
 export class TableTennis{
+    /**
+     * @constructs TableTennis
+     * @param Object Container Object for our game
+     */
     constructor(ttContainer){
         ttContainer.innerHTML += GameLayout;
         this.tempProjX = null;

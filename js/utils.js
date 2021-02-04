@@ -1,5 +1,14 @@
 import { PLAYER_PROJECTOR } from './constants/constants.js';
 
+/**
+  * Summary. Get 2D coordinate from a 3D Coordinate
+  *
+  * Description. 
+  * Uses Intrisic Rotation in order to rotate the world coordinate and translate it w.r.t. viewer position 
+  * 
+  * @param {Object}   3D Coordinates
+  * @return {Object}  2D Coordinates
+*/
 export function get2dCoordinate (position) {
   let cx = Math.cos(PLAYER_PROJECTOR.cameraOrientation.x);
   let sx = Math.sin(PLAYER_PROJECTOR.cameraOrientation.x);

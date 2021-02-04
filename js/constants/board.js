@@ -17,7 +17,7 @@ const Official = {
     NET_HEIGHT: 15.25
 }
 
-
+//Our Board Size
 export const BOARD = {
     LENGTH : BOARD_LENGTH,
     WIDTH : BOARD_LENGTH * Official.WIDTH / Official.LENGTH,

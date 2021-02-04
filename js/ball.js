@@ -4,7 +4,15 @@ import { ACCELERATION_DUE_TO_GRAVITY, SPEED_AFTER_BOUNCE} from './constants/cons
 import { DISTANCE_TO_BOARD, BOARD, BOARD_COORDINATE, BOARD_LENGTH } from './constants/board.js';
 
 export class Ball{
+    /**
+     * @constructs Ball
+     * @param Array  Array of Canvas Context
+     * @param Object Board Object
+     * @param Number GameMode ie. vs Bot or vs Friend
+     * @param Number Player Id to Serve First
+     */
     constructor(ctx, board, gameMode, firstServePlayer = 0){
+        console.log(typeof ctx, typeof board, typeof gameMode, typeof firstServePlayer)
         this.ctx = ctx;
         this.board = board;
         this.position = { x:0, y:0, z:0};

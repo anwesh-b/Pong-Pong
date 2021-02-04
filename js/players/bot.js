@@ -3,6 +3,16 @@ import { CHECK_BALL_TIMER } from '../constants/constants.js';
 import { BOARD, BOARD_LENGTH, DISTANCE_TO_BOARD } from '../constants/board.js';
 
 export class Bot extends Player{
+    /**
+     * @constructs Bot
+     * @param Array  Array of Canvas Context
+     * @param Number Initial x coordinate of Player
+     * @param Number Initial x coordinate of Player
+     * @param Number Initial x coordinate of Player
+     * @param Number Player Id
+     * @param String Player Name
+     * @param Object Ball Object
+     */
     constructor(ctx, x, y, z, id, name, ball){
         super(ctx, x, y ,z, id, name);
         this.ball = ball;

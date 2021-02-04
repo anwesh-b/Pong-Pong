@@ -3,6 +3,15 @@ import { BOARD } from '../constants/board.js';
 import { BAT_HEIGHT, CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants/constants.js';
 
 export class Human extends Player{
+    /**
+     * @constructs Human
+     * @param Array  Array of Canvas Context
+     * @param Number Initial x coordinate of Player
+     * @param Number Initial x coordinate of Player
+     * @param Number Initial x coordinate of Player
+     * @param Number Player Id
+     * @param String Player Name
+     */
     constructor(ctx, x, y, z, id, name, movement, gameMode){
         super(ctx, x, y, z, id, name);
         this.gameMode = gameMode;

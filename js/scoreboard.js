@@ -1,6 +1,12 @@
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from './constants/constants.js';
 
 export class Scoreboard{
+    /**
+     * @constructs Scoreboard
+     * @param Object Canvas Context Object
+     * @param Object Player1 Object
+     * @param Object Player2 Object
+     */
     constructor(ctx, player1, player2){
         this.ctx = ctx;
         this.player1 = player1;

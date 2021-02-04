@@ -12,6 +12,16 @@ import { CANVAS_HEIGHT,
 
             
 export class Game{
+    /**
+     * @constructs Game
+     * @param Object Game Container Object
+     * @param String GameMode ie. vs Bot or vs Friend
+     * @param String Score to win a Game
+     * @param String Change serve after this serves
+     * @param String Best of 1/3/5
+     * @param String Player1 Name
+     * @param String Player2 Name
+     */
     constructor(gameContainer, gameMode, gameAt, serveChangeAt, maxGame, p1Name, p2Name){
         this.gameMode = gameMode;
         gameContainer.innerHTML = '<canvas></canvas>'.repeat(this.gameMode+1);
