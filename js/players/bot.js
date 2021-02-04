@@ -25,20 +25,18 @@ export class Bot extends Player{
 
     neededChange(){
         this.currentBallPos = this.ball.position;
-        this.dX = (this.currentBallPos.x);
-        if (this.ball.dZ >= 0 && 
-            this.ball.position.z > DISTANCE_TO_BOARD + BOARD_LENGTH/2 &&
-            this.ball.position.y > BOARD.HEIGHT * 3/ 4) {
-            this.dY = this.currentBallPos.y;
+        this.dX = 0;
+        this.dY = 0;
+        this.dX = (Math.random()/2 +0.3) * (this.batPosition.x - this.currentBallPos.x);
+        if (this.ball.position.z > DISTANCE_TO_BOARD + BOARD_LENGTH/2) {
+            this.dY= (this.currentBallPos.y - this.batPosition.y) ;
         }
-        this.dY= (this.currentBallPos.y+this.ball.dY) ;
-        // this.dZ = (this.currentBallPos.z+this.ball.dZ) ;
     }
 
     moveBot(){
         this.neededChange();
-        this.batPosition.x = this.dX;
-        this.batPosition.y = this.dY;
+        this.batPosition.x -= this.dX;
+        this.batPosition.y += this.dY;
         if (this.batPosition.y > BOARD.HEIGHT){
             this.batPosition.y -= 2* (this.batPosition.y - BOARD.HEIGHT)
         }
