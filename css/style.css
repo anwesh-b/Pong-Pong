@@ -2,6 +2,29 @@ body{
     background-color: rgb(168, 224, 247);
 }
 
+.footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.footer .js-icon{
+    display: inline-block;
+    background-color: #f8dc3d;
+    color: #2e2e2c;
+    height: 100%;
+    position: absolute;
+    width: 25px;
+}
+
+.footer .js-icon .text{
+    right: 2px;
+    bottom: 0px;
+    position: absolute;
+} 
+
 .dashboard-container{
     display: block;
     width: 100vw;
