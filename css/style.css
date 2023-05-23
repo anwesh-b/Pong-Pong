@@ -53,6 +53,38 @@ body{
     transition: 0.5s;
 }
 
+#high_score-icon{
+    /* width: 50px; */
+    float: right;
+    overflow: hidden;
+    margin: 15px 15px 0 0;
+    padding: 5px;
+    transition: 0.5s;
+    border-radius: 20px;
+    background-color: rgba(100, 100, 100, 1);
+}
+
+#high_score-icon:hover{
+    border-radius: 30px;
+    transition: 0.5s;
+}
+
+#feedback-icon{
+    /* width: 50px; */
+    float: right;
+    overflow: hidden;
+    margin: 15px 15px 0 0;
+    padding: 5px 10px;
+    transition: 0.5s;
+    border-radius: 20px;
+    background-color: rgba(100, 100, 100, 1);
+}
+
+#feedback-icon:hover{
+    border-radius: 30px;
+    transition: 0.5s;
+}
+
 .main-dashboard{
     width: 100%;
     margin-top: 100px;
@@ -103,12 +135,12 @@ body{
 }
 
 
-#back-settings{
+.back-button{
     margin: 10px 0 0 10px;
     float: left;
 }
 
-#back-settings button{
+.back-button button{
     border: solid 2px;
     font-weight: 600;
     padding: 4px 8px;
@@ -117,7 +149,7 @@ body{
     border-radius: 5px;
 }
 
-#back-settings button:hover{
+.back-button button:hover{
     border: none;
     border: solid 2px rgba(0,0,0,0.1);
     background-color: rgba(0,0,0,0.5);
@@ -210,4 +242,63 @@ body{
 
 canvas{
     float: left;
+}
+
+
+tr{
+    /* padding: 10px  */
+}
+
+td{
+    padding: 2px 10px;
+
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+#high-score-data{
+    margin: 20px auto 0 auto;
+}
+
+.form-label{
+    display: block;
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.form-input{
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid 1px;
+}
+
+.form-textarea{
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid 1px;
+}
+
+.feedback-container{
+    display: none;
+}
+
+.feedback{
+    margin: 0 auto
+}
+
+.feedback-form{
+    margin: 0 auto;
+    width: 30%
+}
+
+.form-button{
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-left: 30px;    
 }

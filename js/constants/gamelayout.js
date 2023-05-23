@@ -4,6 +4,12 @@ export const GameLayout = `
         <div id="setting-icon">
             <a><img src="./assets/settings.png"></a>
         </div>
+        <div id="high_score-icon">
+            HS
+        </div>
+        <div id="feedback-icon">
+            Feedback
+        </div>
         <div class="main-dashboard">
             <div id="title">
                 Pong Pong
@@ -15,7 +21,7 @@ export const GameLayout = `
         </div>
     </div>
     <div class="setting-container">
-        <div id="back-settings">
+        <div class="back-button" id="back-settings">
             <button>Back</button>
         </div>
         <div class="settings"> 
@@ -65,7 +71,43 @@ export const GameLayout = `
             </table>
             <button>Save</button>
         </div>
-    </div>    
+    </div> 
+    <div class="highscore-container">
+        <div class="back-button" id="back-high-score">
+            <button>Back</button>
+        </div>
+        <div class="high-score">
+            <div id="title">
+                High Score
+            </div>
+            <table id="high-score-data">
+                <tr>
+                    <th>Player</th>
+                    <th>Score</th>
+                    <th>Opponent</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="feedback-container">
+        <div class="back-button" id="back-feedback">
+            <button>Back</button>
+        </div>
+        <div id="title">
+            Feedback
+        </div>
+        <div class="feedback">
+            <div class="feedback-form">
+                <label class="form-label" for="name">Name</label> <br/>
+                <input class="form-input" type="text" id="feedback-name" name="name" placeholder="Your name.."><br/><br/>
+                <label class="form-label" for="email">Email</label><br/>
+                <input class="form-input" type="text" id="feedback-email" name="email" placeholder="Your email.."><br/><br/>
+                <label class="form-label" for="subject">Feedback</label><br/>
+                <textarea class="form-textarea" id="feedback-subject" name="subject" placeholder="Write something.." style="height:200px"></textarea><br/><br/>
+                <input id="form-button" class="form-button" type="submit" value="Submit">
+            </div>
+        </div>
+    </div>
 </div>
 <button class="quit-game">QUIT</button>
 <div id="ping-pong-container">
