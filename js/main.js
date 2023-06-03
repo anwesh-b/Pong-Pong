@@ -1,6 +1,7 @@
 import { Game } from "./game.js";
 import { GameLayout } from "./constants/gamelayout.js";
-import { PLAYER_PROJECTOR } from "./constants/constants.js";
+import { API_SERVER_URL, PLAYER_PROJECTOR } from "./constants/constants.js";
+import { post } from "./utils/http.js";
 
 export class TableTennis {
   /**
@@ -44,7 +45,6 @@ export class TableTennis {
     this.maxGame = localStorage.getItem("maxGame") || "1";
     this.feedbackFormButton = document.querySelector("#form-button");
     this.setAllEventListeners();
-    console.log({ a: this.feedbackFormButton });
   }
 
   getHighScores() {
@@ -68,38 +68,83 @@ export class TableTennis {
     });
 
     // debugger
-    this.feedbackFormButton.addEventListener("click", () => {
+    this.feedbackFormButton.addEventListener("click", async () => {
       const feedbackName = document.querySelector("#feedback-name");
       const feedbackEmail = document.querySelector("#feedback-email");
       const feedbackFeedback = document.querySelector("#feedback-subject");
-      
+      const nameError = document.querySelector("#name-error");
+      const mailError = document.querySelector("#email-error");
+      const feedbackError = document.querySelector("#feedback-error");
+
+      let isError = false;
       //validate
       const body = {
         name: feedbackName.value,
         email: feedbackEmail.value,
-        feedback: feedbackFeedback.value ,
+        message: feedbackFeedback.value,
       };
 
-      fetch("http://127.0.0.1:8848/api", {
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Accept-Language": "en-US,en;q=0.5",
-          Pragma: "no-cache",
-          "Cache-Control": "no-cache",
-          "Sec-GPC": "1",
-          "Content-Type": "application/json",
-        },
-        referrer: "http://fyp.anweshb.com/",
-        method: "POST",
-        body: JSON.stringify(body),
-        mode: "cors",
-      }).then((res) => {
-        console.log(res);
-        //remove feedback
-        //redirect to dashboard
-      }).catch(e=>{
-        console.log(e)
-      });
+      if (!body.name) {
+        nameError.innerHTML = "Name is required";
+        isError = true;
+      }
+
+      if (body.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email)) {
+        mailError.innerHTML = "Email is not valid";
+        isError = true;
+      }
+
+      if (!body.email) {
+        mailError.innerHTML = "Email is required";
+        isError = true;
+      }
+
+      if (body.message && body.message.length < 8) {
+        feedbackError.innerHTML = "Feedback must be atleast 8 characters";
+        isError = true;
+      }
+
+      if (!body.message) {
+        feedbackError.innerHTML = "Feedback is required";
+        isError = true;
+      }
+
+      if (isError) return;
+
+      try {
+        this.feedbackButton.disabled = true;
+        this.feedbackButton.innerHTML = "Sending...";
+        const data = await post(API_SERVER_URL, body);
+
+        console.log(data);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        feedbackName.value = "";
+        feedbackEmail.value = "";
+        feedbackFeedback.value = "";
+        this.feedbackButton.innerHTML = "Submit";
+      }
+      // fetch(API_SERVER_URL, {
+      //   headers: {
+      //     Accept: "application/json, text/plain, */*",
+      //     "Accept-Language": "en-US,en;q=0.5",
+      //     Pragma: "no-cache",
+      //     "Cache-Control": "no-cache",
+      //     "Sec-GPC": "1",
+      //     "Content-Type": "application/json",
+      //   },
+      //   referrer: "http://fyp.anweshb.com/",
+      //   method: "POST",
+      //   body: JSON.stringify(body),
+      //   mode: "cors",
+      // }).then((res) => {
+      //   console.log(res);
+      //   //remove feedback
+      //   //redirect to dashboard
+      // }).catch(e=>{
+      //   console.log(e)
+      // });
     });
 
     this.highScoreButton.addEventListener("click", () => {

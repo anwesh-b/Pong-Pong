@@ -302,3 +302,22 @@ table, th, td {
     border-radius: 5px;
     margin-left: 30px;    
 }
+
+.error{
+    color: red;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+#setting-icon{
+    cursor: pointer !important;
+}
+
+#high_score-icon{
+    cursor: pointer !important;
+}
+
+#feedback-icon{
+    cursor: pointer !important;
+}
+

@@ -12,12 +12,22 @@ export const GameLayout = `
         </div>
         <div class="main-dashboard">
             <div id="title">
-                Pong Pong
+                3D Table Tennis
             </div>
             <ul>
                 <li><img src="./assets/bot.png">vs Henry</li>
                 <li><img src="./assets/multiplayer.png">vs Friends</li>
             </ul>
+            <br/>
+            <br/>
+            <br/>
+            Done by:
+            <br/>
+            Anwesh Budhathoki - 20130
+            <br/>
+            Rishu Chaudhary - 20161
+            <br/>
+            Daisy Sharma - 20142
         </div>
     </div>
     <div class="setting-container">
@@ -99,11 +109,14 @@ export const GameLayout = `
         <div class="feedback">
             <div class="feedback-form">
                 <label class="form-label" for="name">Name</label> <br/>
-                <input class="form-input" type="text" id="feedback-name" name="name" placeholder="Your name.."><br/><br/>
+                <input class="form-input" type="text" id="feedback-name" name="name" placeholder="Your name.."><br/>
+                <span id="name-error" class="error"></span><br/><br/>
                 <label class="form-label" for="email">Email</label><br/>
-                <input class="form-input" type="text" id="feedback-email" name="email" placeholder="Your email.."><br/><br/>
+                <input class="form-input" type="text" id="feedback-email" name="email" placeholder="Your email.."><br/>
+                <span id="email-error" class="error"></span><br/><br/>
                 <label class="form-label" for="subject">Feedback</label><br/>
-                <textarea class="form-textarea" id="feedback-subject" name="subject" placeholder="Write something.." style="height:200px"></textarea><br/><br/>
+                <textarea class="form-textarea" id="feedback-subject" name="subject" placeholder="Write something.." style="height:200px"></textarea><br/>
+                <span id="feedback-error" class="error"></span><br/><br/>
                 <input id="form-button" class="form-button" type="submit" value="Submit">
             </div>
         </div>
@@ -117,4 +130,4 @@ export const GameLayout = `
     <div id="play-again">
         <img src="./assets/replay.png"> Play again 
     </div>
-</div>`
+</div>`;

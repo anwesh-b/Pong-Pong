@@ -1,5 +1,7 @@
 import { BOARD, DISTANCE_TO_BOARD } from './board.js';
 
+export const API_SERVER_URL="https://3dttbackend.azurewebsites.net/submit-feedback";
+
 // Canvas constant
 export const CANVAS_WIDTH = window.innerWidth;
 export const CANVAS_HEIGHT = window.innerHeight; 
